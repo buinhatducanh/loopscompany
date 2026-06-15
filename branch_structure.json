@@ -1,0 +1,36 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "ContactLead/quynh",
+    "crudProject/quynh",
+    "designUXUI/Tai",
+    "detailMB/quynh",
+    "fixsignin/quynh",
+    "landingpage/Hung",
+    "main",
+    "thiet_ke_web/Hung",
+    "uxui/quynh"
+  ],
+  "parent": {
+    "ContactLead/quynh": "main",
+    "crudProject/quynh": "main",
+    "designUXUI/Tai": "main",
+    "detailMB/quynh": "main",
+    "fixsignin/quynh": "main",
+    "landingpage/Hung": "main",
+    "main": null,
+    "thiet_ke_web/Hung": "main",
+    "uxui/quynh": "main"
+  },
+  "order": [
+    "main",
+    "ContactLead/quynh",
+    "crudProject/quynh",
+    "designUXUI/Tai",
+    "detailMB/quynh",
+    "fixsignin/quynh",
+    "landingpage/Hung",
+    "thiet_ke_web/Hung",
+    "uxui/quynh"
+  ]
+}
