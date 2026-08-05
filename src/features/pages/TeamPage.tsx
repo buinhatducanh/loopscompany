@@ -85,6 +85,7 @@ const team = [
 
 interface TeamMember {
   id?: string;
+  slug?: string;
   name: string;
   role: string;
   roleEn?: string;
@@ -119,8 +120,8 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
   const frameShadow = `${FRAME_DEPTH}px ${FRAME_DEPTH}px 0 #C8C3B5, ${FRAME_DEPTH * 2}px ${FRAME_DEPTH * 2}px 0 #B0ABA0, ${FRAME_DEPTH * 2}px ${FRAME_DEPTH * 2}px 36px rgba(26,20,10,0.12)`;
 
   const handleCardClick = () => {
-    const id = member.id || member.name.replace(/\s+/g, '-').toLowerCase();
-    router.push(`/doi-ngu/${id}`);
+    const linkId = member.slug || member.id || member.name.replace(/\s+/g, '-').toLowerCase();
+    router.push(`/doi-ngu/${linkId}`);
   };
 
   return (
