@@ -14,6 +14,21 @@ export async function GET() {
   }
 }
 
+function formatSlug(slug: string | undefined | null): string | null {
+  if (!slug || !slug.trim()) return null;
+  const formatted = slug
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "d")
+    .replace(/[^a-z0-9\-_]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+  return formatted || null;
+}
+
 export async function POST(request: Request) {
   const session = await getSession();
   if (!session || session.role !== "admin") {
@@ -29,9 +44,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Chức vụ không được để trống" }, { status: 400 });
     }
 
+    const slugValue = formatSlug(data.slug);
+
     const newMember = await prisma.teamMember.create({
       data: {
         name: data.name.trim(),
+        slug: slugValue,
         role: data.role.trim(),
         roleEn: data.roleEn ? data.roleEn.trim() : "",
         avatar: data.avatar || "",
@@ -70,10 +88,13 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "Họ và tên không được để trống" }, { status: 400 });
     }
 
+    const slugValue = formatSlug(data.slug);
+
     const member = await prisma.teamMember.update({
       where: { id: data.id },
       data: {
         name: data.name.trim(),
+        slug: slugValue,
         role: data.role.trim(),
         roleEn: data.roleEn ? data.roleEn.trim() : "",
         avatar: data.avatar || "",
