@@ -159,11 +159,11 @@ export default function TeamMemberDetailPage({ id }: { id: string }) {
       .then((data) => {
         let found = null;
         if (data && data.length > 0) {
-          found = data.find((m: any) => m.id === id || m.name.replace(/\s+/g, '-').toLowerCase() === id);
+          found = data.find((m: any) => m.slug === id || m.id === id || m.name.replace(/\s+/g, '-').toLowerCase() === id);
         }
         
         if (!found) {
-          found = fallbackTeam.find(m => m.id === id || m.name.replace(/\s+/g, '-').toLowerCase() === id);
+          found = fallbackTeam.find((m: any) => m.slug === id || m.id === id || m.name.replace(/\s+/g, '-').toLowerCase() === id);
         }
         
         setMember(found);
@@ -171,7 +171,7 @@ export default function TeamMemberDetailPage({ id }: { id: string }) {
       })
       .catch((err) => {
         console.error("Failed to fetch team members:", err);
-        const found = fallbackTeam.find(m => m.id === id || m.name.replace(/\s+/g, '-').toLowerCase() === id);
+        const found = fallbackTeam.find((m: any) => m.slug === id || m.id === id || m.name.replace(/\s+/g, '-').toLowerCase() === id);
         setMember(found);
         setLoading(false);
       });

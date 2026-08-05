@@ -5,6 +5,7 @@ import type { TC } from "./types";
 interface TeamMember {
   id?: string;
   name: string;
+  slug?: string;
   role: string;
   roleEn: string;
   avatar: string;
@@ -28,6 +29,7 @@ interface Props {
 
 const EMPTY: TeamMember = {
   name: "",
+  slug: "",
   role: "",
   roleEn: "",
   avatar: "",
@@ -262,6 +264,9 @@ export function TeamManager({ t, isDark }: Props) {
                   <div className="min-w-0">
                     <p title={member.name} className={`font-bold truncate ${t.text}`}>{member.name}</p>
                     <p title={`${member.role}${member.roleEn ? ` (${member.roleEn})` : ""}`} className={`text-xs truncate ${t.textMuted}`}>{member.role} {member.roleEn ? `(${member.roleEn})` : ""}</p>
+                    <p className="text-[11px] font-mono text-[#C8A261] truncate mt-0.5" title={`/doi-ngu/${member.slug || member.id}`}>
+                      /doi-ngu/{member.slug || member.id}
+                    </p>
                   </div>
                 </div>
                 <div className="flex shrink-0 gap-1">
@@ -331,6 +336,15 @@ export function TeamManager({ t, isDark }: Props) {
                   <input value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                     className={`w-full rounded-xl px-4 py-2.5 text-sm transition ${t.input}`}
                     placeholder="Nguyễn An" />
+                </div>
+                <div className="col-span-2">
+                  <label className={`mb-1.5 block text-sm font-medium ${t.textMuted}`}>Đường dẫn tùy chỉnh (URL Slug)</label>
+                  <input value={form.slug || ""} onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))}
+                    className={`w-full rounded-xl px-4 py-2.5 text-sm transition ${t.input}`}
+                    placeholder="vd: nguyen-an (nếu để trống sẽ dùng ID ngẫu nhiên)" />
+                  <p className={`mt-1 text-[11px] ${t.textFaint}`}>
+                    Link truy cập: <span className="font-mono text-[#C8A261]">/doi-ngu/{form.slug ? form.slug.trim().toLowerCase().replace(/\s+/g, '-') : (form.id || "...")}</span>
+                  </p>
                 </div>
                 <div>
                   <label className={`mb-1.5 block text-sm font-medium ${t.textMuted}`}>Chức vụ (VI) *</label>
