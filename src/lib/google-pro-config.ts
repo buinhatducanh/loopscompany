@@ -16,9 +16,22 @@ export interface GoogleProConfig {
 }
 
 export const GOOGLE_PRO_MEDIA = {
-  // Cloudinary CDN with automatic format/quality compression & edge caching
+  // 1. BANNER VIDEO (Woman advertising Google Gemini Pro)
+  banner: {
+    videoUrl: "https://res.cloudinary.com/dhlmvawmi/video/upload/f_auto,q_auto/v1791971694/loop_ads/google_pro_banner_advertising.mp4",
+    videoLocalUrl: "/videos/Woman_advertising_Google_Gemini_Pro.mp4",
+    posterUrl: "/img/woman_office_google_pro.jpg",
+  },
+
+  // 2. CARD ADS SPOTLIGHT VIDEO (Woman holding smartphone showing ad)
+  cardSpotlight: {
+    videoUrl: "https://res.cloudinary.com/dhlmvawmi/video/upload/f_auto,q_auto/v1791969423/loop_ads/google_pro_holding_smartphone.mp4",
+    videoLocalUrl: "/videos/Woman_holding_smartphone_showing_ad.mp4",
+    posterUrl: "/img/ads-google-pro-stopped.jpg",
+  },
+
+  // Default / Backwards compatibility
   videoUrl: "https://res.cloudinary.com/dhlmvawmi/video/upload/f_auto,q_auto/v1791969423/loop_ads/google_pro_holding_smartphone.mp4",
-  // Local fallback
   videoLocalUrl: "/videos/Woman_holding_smartphone_showing_ad.mp4",
   posterUrl: "/img/ads-google-pro-stopped.jpg",
 };

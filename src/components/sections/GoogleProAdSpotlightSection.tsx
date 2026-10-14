@@ -183,8 +183,8 @@ export function GoogleProAdSpotlightSection() {
                 />
                 <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
                   <VerticalAdVideo
-                    videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
-                    posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
+                    videoSrc={GOOGLE_PRO_MEDIA.cardSpotlight.videoUrl}
+                    posterSrc={GOOGLE_PRO_MEDIA.cardSpotlight.posterUrl}
                     stopSeconds={8}
                     ctaLink="/google-pro"
                     className="max-w-[240px] sm:max-w-[270px]"
@@ -363,8 +363,8 @@ export function GoogleProAdSpotlightSection() {
               />
               <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
                 <VerticalAdVideo
-                  videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
-                  posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
+                  videoSrc={GOOGLE_PRO_MEDIA.cardSpotlight.videoUrl}
+                  posterSrc={GOOGLE_PRO_MEDIA.cardSpotlight.posterUrl}
                   stopSeconds={8}
                   ctaLink="/google-pro"
                 />

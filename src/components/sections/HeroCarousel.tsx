@@ -270,14 +270,10 @@ export function HeroCarousel() {
                 }}
               >
                 <VerticalAdVideo
-                  videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
-                  posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
+                  videoSrc={GOOGLE_PRO_MEDIA.banner.videoUrl}
+                  posterSrc={GOOGLE_PRO_MEDIA.banner.posterUrl}
                   stopSeconds={8}
                   ctaLink="/google-pro"
-                  badge="ƯU ĐÃI ĐỘC QUYỀN · 299K"
-                  title="Google Pro 18 Tháng — 5TB & AI"
-                  price="299.000đ"
-                  discountText="Ưu Đãi Đặc Biệt — Giảm 85%"
                   className="max-w-[325px] sm:max-w-[360px] md:max-w-[385px] lg:max-w-[415px] xl:max-w-[430px]"
                 />
               </div>
