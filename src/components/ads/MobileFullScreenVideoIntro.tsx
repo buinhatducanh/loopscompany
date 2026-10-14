@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, Volume2, VolumeX, ArrowRight, RotateCcw, Sparkles } from "lucide-react";
+import { GOOGLE_PRO_MEDIA } from "@/lib/google-pro-config";
 
 interface MobileFullScreenVideoIntroProps {
   videoSrc?: string;
@@ -13,8 +14,8 @@ interface MobileFullScreenVideoIntroProps {
 }
 
 export function MobileFullScreenVideoIntro({
-  videoSrc = "/videos/Woman_advertising_Google_Gemini_Pro.mp4",
-  posterSrc = "/img/ads-google-pro-stopped.jpg",
+  videoSrc = GOOGLE_PRO_MEDIA.videoUrl,
+  posterSrc = GOOGLE_PRO_MEDIA.posterUrl,
   stopSeconds = 8,
   ctaLink = "/google-pro",
   targetBannerId = "main-banner",

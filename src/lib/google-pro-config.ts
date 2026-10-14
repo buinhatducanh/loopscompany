@@ -10,7 +10,18 @@ export interface GoogleProConfig {
   defaultActivationLink: string;
   zaloSupport: string;
   hotline: string;
+  adVideoUrl: string;
+  adVideoLocalUrl: string;
+  adPosterUrl: string;
 }
+
+export const GOOGLE_PRO_MEDIA = {
+  // Cloudinary CDN with automatic format/quality compression & edge caching
+  videoUrl: "https://res.cloudinary.com/dhlmvawmi/video/upload/f_auto,q_auto/v1791969423/loop_ads/google_pro_holding_smartphone.mp4",
+  // Local fallback
+  videoLocalUrl: "/videos/Woman_holding_smartphone_showing_ad.mp4",
+  posterUrl: "/img/ads-google-pro-stopped.jpg",
+};
 
 export const GOOGLE_PRO_CONFIG: GoogleProConfig = {
   price: 299000,
@@ -24,6 +35,9 @@ export const GOOGLE_PRO_CONFIG: GoogleProConfig = {
   defaultActivationLink: process.env.NEXT_PUBLIC_GOOGLE_PRO_ACTIVATION_LINK || "https://one.google.com/family/join?token=ACTIVE_LOOP_GOOGLE_PRO_18M",
   zaloSupport: process.env.NEXT_PUBLIC_GOOGLE_PRO_ZALO || "https://zalo.me/0378443602",
   hotline: process.env.NEXT_PUBLIC_GOOGLE_PRO_HOTLINE || "0378 443 602",
+  adVideoUrl: GOOGLE_PRO_MEDIA.videoUrl,
+  adVideoLocalUrl: GOOGLE_PRO_MEDIA.videoLocalUrl,
+  adPosterUrl: GOOGLE_PRO_MEDIA.posterUrl,
 };
 
 export function generateOrderCode(): string {

@@ -8,6 +8,7 @@ import { VerticalAdVideo } from "@/components/ads/VerticalAdVideo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Orb } from "@/components/ui/SectionBg";
 import { RED, RED_DIM, TEXT, TEXT60, TEXT35, BORDER, BORDER_M, GLASS, EASE } from "@/features/legacy-core/tokens";
+import { GOOGLE_PRO_MEDIA } from "@/lib/google-pro-config";
 
 export function GoogleProAdSpotlightSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -88,8 +89,8 @@ export function GoogleProAdSpotlightSection() {
               {/* Component Video 9:16 - Lấy đúng ảnh D:\LOOP_COMPANY\ASSETS\Media\aa2dd096-fce4-4e1a-82c8-3fbc6cb53e84.jpg */}
               <div style={{ position: "relative", zIndex: 2, width: "100%", display: "flex", justifyContent: "center" }}>
                 <VerticalAdVideo
-                  videoSrc="/videos/Woman_advertising_Google_Gemini_Pro.mp4"
-                  posterSrc="/img/ads-google-pro-stopped.jpg"
+                  videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
+                  posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
                   stopSeconds={8}
                   ctaLink="/google-pro"
                   title="Google Pro 18 Tháng — 5TB & AI"

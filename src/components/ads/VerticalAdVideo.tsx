@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { Play, Pause, Volume2, VolumeX, RotateCcw, ArrowRight } from "lucide-react";
+import { GOOGLE_PRO_MEDIA } from "@/lib/google-pro-config";
 
 interface VerticalAdVideoProps {
   videoSrc?: string;
@@ -18,8 +19,8 @@ interface VerticalAdVideoProps {
 }
 
 export function VerticalAdVideo({
-  videoSrc = "/videos/Woman_advertising_Google_Gemini_Pro.mp4",
-  posterSrc = "/img/ads-google-pro-stopped.jpg",
+  videoSrc = GOOGLE_PRO_MEDIA.videoUrl,
+  posterSrc = GOOGLE_PRO_MEDIA.posterUrl,
   stopSeconds = 8,
   ctaLink = "/google-pro",
   badge = "ƯU ĐÃI ĐỘC QUYỀN",
@@ -35,6 +36,11 @@ export function VerticalAdVideo({
   const [progress, setProgress] = useState(0);
   const [hasStopped, setHasStopped] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [currentSrc, setCurrentSrc] = useState(videoSrc);
+
+  useEffect(() => {
+    setCurrentSrc(videoSrc);
+  }, [videoSrc]);
 
   // MỖI KHI RELOAD LANDING PAGE: Tự động reset và phát lại video từ 0s
   useEffect(() => {
@@ -152,11 +158,17 @@ export function VerticalAdVideo({
         {/* Thẻ Video 9:16 tràn viền (Phát tự động từ 0s mỗi khi tải trang) */}
         <video
           ref={videoRef}
-          src={videoSrc}
+          src={currentSrc}
           autoPlay
           muted={isMuted}
           playsInline
+          preload="metadata"
           loop={false}
+          onError={() => {
+            if (currentSrc !== GOOGLE_PRO_MEDIA.videoLocalUrl) {
+              setCurrentSrc(GOOGLE_PRO_MEDIA.videoLocalUrl);
+            }
+          }}
           onTimeUpdate={handleTimeUpdate}
           onEnded={handleVideoEnded}
           className={`w-full h-full object-cover transition-opacity duration-500 ${

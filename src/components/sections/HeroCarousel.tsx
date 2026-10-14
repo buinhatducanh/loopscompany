@@ -9,6 +9,7 @@ import { VerticalAdVideo } from "@/components/ads/VerticalAdVideo";
 import { IMG } from "@/features/legacy-core/images";
 import { useSiteData } from "@/features/legacy-core/SiteDataContext";
 import { RED, RED_DIM, TEXT, TEXT60, TEXT35, BORDER, BORDER_M, GLASS, EASE } from "@/features/legacy-core/tokens";
+import { GOOGLE_PRO_MEDIA } from "@/lib/google-pro-config";
 
 const SLIDE_DURATION = 10000;
 
@@ -269,8 +270,8 @@ export function HeroCarousel() {
                 }}
               >
                 <VerticalAdVideo
-                  videoSrc="/videos/Woman_advertising_Google_Gemini_Pro.mp4"
-                  posterSrc="/img/ads-google-pro-stopped.jpg"
+                  videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
+                  posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
                   stopSeconds={8}
                   ctaLink="/google-pro"
                   badge="ƯU ĐÃI ĐỘC QUYỀN · 299K"

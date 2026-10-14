@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import {
   GOOGLE_PRO_CONFIG,
+  GOOGLE_PRO_MEDIA,
   generateOrderCode,
   getVietQrUrl,
 } from "@/lib/google-pro-config";
@@ -381,8 +382,8 @@ export default function GoogleProLandingClient() {
           <div className="md:col-span-5 flex flex-col items-center">
             <div className="w-full max-w-[280px] bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-2 shadow-2xl">
               <VerticalAdVideo
-                videoSrc="/videos/Woman_advertising_Google_Gemini_Pro.mp4"
-                posterSrc="/img/ads-google-pro-stopped.jpg"
+                videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
+                posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
                 stopSeconds={8}
                 ctaLink="#form-checkout"
                 title="Google Pro 5TB & AI"
