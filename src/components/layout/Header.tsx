@@ -6,13 +6,12 @@ import { Globe, Menu, X, Sun, Moon, User, LogOut } from 'lucide-react';
 import { useTheme } from '@/features/legacy-core/theme-context';
 import { SITE } from '@/lib/site';
 import Link from 'next/link';
-import { HeaderAdStory } from './HeaderAdStory';
 
 const F = "inherit";
 
 const NAV = [
-  { label: 'Dịch vụ', href: '/#services'  },
-  { label: 'Google Pro 299K', href: '/google-pro' },
+  { label: 'Dịch vụ', href: '/#services' },
+  { label: 'Google Pro', href: '/google-pro', badge: '299K' },
   { label: 'Dự án',   href: '/du-an' },
   { label: 'Báo giá', href: '/bao-gia'   },
   { label: 'Đội ngũ', href: '/doi-ngu'    },
@@ -150,23 +149,48 @@ export function Header() {
           boxShadow: 'var(--sc-header-shadow, 0 8px 32px rgba(0, 0, 0, 0.05))',
           overflow: 'visible',
         }}>
-          {/* Logo & Story Ad */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', flexShrink: 0 }}>
-              <img src={logoSrc} alt="LOOP Logo" style={{ height: '42px', objectFit: 'contain' }} />
-            </Link>
-            <HeaderAdStory />
-          </div>
+          {/* Logo */}
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', flexShrink: 0 }}>
+            <img src={logoSrc} alt="LOOP Logo" style={{ height: '42px', objectFit: 'contain' }} />
+          </Link>
 
           {/* Desktop links — hidden on mobile via display none at <768px */}
-          <div style={{ gap: 'clamp(16px,2.5vw,28px)', alignItems: 'center' }} className="hidden md:flex">
+          <div style={{ gap: 'clamp(14px,2.2vw,24px)', alignItems: 'center' }} className="hidden md:flex">
             {NAV.map(l => (
               <Link key={l.label} href={l.href}
                 onClick={e => goTo(l.href, e)}
-                style={{ color: textMuted, fontSize: '13px', fontFamily: F, fontWeight: 600, textDecoration: 'none', transition: 'color 0.2s', whiteSpace: 'nowrap' }}
-                onMouseEnter={e => e.currentTarget.style.color = textColor}
-                onMouseLeave={e => e.currentTarget.style.color = textMuted}
-              >{l.label}</Link>
+                style={{
+                  color: l.badge ? '#3b82f6' : textMuted,
+                  fontSize: '13px',
+                  fontFamily: F,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                  whiteSpace: 'nowrap',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px'
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = l.badge ? '#60a5fa' : textColor}
+                onMouseLeave={e => e.currentTarget.style.color = l.badge ? '#3b82f6' : textMuted}
+              >
+                <span>{l.label}</span>
+                {l.badge && (
+                  <span style={{
+                    backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                    color: '#ef4444',
+                    border: '1px solid rgba(239, 68, 68, 0.25)',
+                    fontSize: '9.5px',
+                    fontWeight: 700,
+                    padding: '1px 5px',
+                    borderRadius: '9999px',
+                    lineHeight: '1.2',
+                    letterSpacing: '0.02em'
+                  }}>
+                    {l.badge}
+                  </span>
+                )}
+              </Link>
             ))}
           </div>
 
@@ -525,7 +549,7 @@ export function Header() {
                   </Link>
                 </motion.div>
                 
-                {NAV.map((l, i) => (
+                {NAV.filter(l => l.href !== '/google-pro').map((l, i) => (
                   <motion.div
                     key={l.label}
                     initial={{ opacity: 0, x: -20 }}
