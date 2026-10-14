@@ -119,49 +119,78 @@ export function HeroCarousel() {
       {!isVideo && (
         <div style={{ position: "relative", zIndex: 3, height: "100%", display: "flex", alignItems: "center", maxWidth: 1280, margin: "0 auto", width: "100%", padding: "clamp(75px, 8vw, 100px) 20px 60px", boxSizing: "border-box" }}>
           <div className="hero-grid flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-14 items-center w-full">
-            {/* Left – Text & CTAs (order-2 trên mobile, order-1 trên desktop) */}
-            <div className="order-2 md:order-1 w-full text-center md:text-left">
+            {/* Left – Text & CTAs (order-1 cả trên mobile lẫn desktop) */}
+            <div className="order-1 md:order-1 w-full text-center md:text-left">
               <AnimatePresence mode="wait">
                 <motion.div key={`content-${current}`} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.6, ease: EASE }}>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, backgroundColor: RED_DIM, border: "1px solid rgba(212,59,31,0.3)", borderRadius: 40, padding: "6px 14px", marginBottom: 20 }}>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, backgroundColor: RED_DIM, border: "1px solid rgba(212,59,31,0.3)", borderRadius: 40, padding: "6px 14px", marginBottom: 18 }}>
                     <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: RED, animation: "pulse 2s ease infinite" }} />
                     <span style={{ color: RED, fontSize: 12, fontWeight: 600, letterSpacing: "0.02em" }}>{slide.badge}</span>
                   </div>
 
-                  <h1 style={{ color: slide.textColor || TEXT, fontSize: "clamp(28px,4.5vw,60px)", fontWeight: 700, lineHeight: 1.08, letterSpacing: "-0.03em", margin: "0 0 18px" }}>
+                  <h1 style={{ color: slide.textColor || TEXT, fontSize: "clamp(28px,4.2vw,56px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", margin: "0 0 16px" }}>
                     {[slide.title1, slide.title2, slide.title3].filter(Boolean).map((line, li) => (
                       <span key={li} style={{ display: "block", color: li === slide.accentIndex ? (slide.accentColor || RED) : (slide.textColor || TEXT) }}>{line}</span>
                     ))}
                   </h1>
 
-                  <p style={{ color: TEXT60, fontSize: "clamp(13px,1.4vw,16px)", lineHeight: 1.75, margin: "0 auto 28px", maxWidth: 440 }} className="md:!mx-0">{slide.sub}</p>
+                  <p style={{ color: TEXT60, fontSize: "clamp(13.5px,1.2vw,16px)", lineHeight: 1.7, margin: "0 auto 24px", maxWidth: 460 }} className="md:!mx-0">{slide.sub}</p>
 
-                  <div className="hero-ctas md:!justify-start" style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                  {/* 2 CTA Buttons on 1 horizontal row */}
+                  <div className="hero-ctas grid grid-cols-2 gap-2 w-full max-w-[350px] mx-auto sm:max-w-none sm:flex sm:flex-row sm:items-center sm:justify-start sm:gap-3 md:mx-0">
                     <button 
                       onClick={() => router.push('/bao-gia')}
-                      style={{ display: "flex", alignItems: "center", gap: 8, backgroundColor: RED, color: "#fff", border: "none", borderRadius: 40, padding: "12px 22px", fontSize: 14, fontWeight: 600, cursor: "pointer", transition: "background-color 0.2s" }}
-                      onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#bb3218")}
-                      onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.backgroundColor = RED)}>
-                      {slide.cta} <ArrowRight size={14} />
-                    </button>
-                    <button 
-                      onClick={() => router.push('/google-pro')}
-                      style={{ display: "flex", alignItems: "center", gap: 8, backgroundColor: "rgba(212, 59, 31, 0.15)", color: "#ff8a73", border: "1px solid rgba(212, 59, 31, 0.4)", borderRadius: 40, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
-                      onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.borderColor = "#ff8a73")}
-                      onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(212, 59, 31, 0.4)")}>
-                      ⚡ Google Pro 18T · 299K
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 5,
+                        background: "linear-gradient(135deg, #d43b1f 0%, #b82e14 100%)",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: 40,
+                        padding: "11px 12px",
+                        fontSize: 12.5,
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        boxShadow: "0 8px 20px rgba(212,59,31,0.35)",
+                        transition: "all 0.2s",
+                        whiteSpace: "nowrap"
+                      }}
+                      className="hover:brightness-110 active:scale-95"
+                    >
+                      <span>{slide.cta.replace('/tháng', '/th')}</span>
+                      <ArrowRight size={13} className="flex-shrink-0" />
                     </button>
                     <button 
                       onClick={handleScrollToServices}
-                      style={{ display: "flex", alignItems: "center", gap: 8, backgroundColor: "transparent", color: TEXT, border: `1px solid ${BORDER_M}`, borderRadius: 40, padding: "12px 20px", fontSize: 14, fontWeight: 500, cursor: "pointer" }}>
-                      Xem dịch vụ
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 5,
+                        backgroundColor: "rgba(255, 255, 255, 0.05)",
+                        color: TEXT,
+                        border: `1px solid ${BORDER_M}`,
+                        borderRadius: 40,
+                        padding: "11px 12px",
+                        fontSize: 12.5,
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        transition: "all 0.2s",
+                        whiteSpace: "nowrap"
+                      }}
+                      className="hover:bg-white/10 active:scale-95"
+                    >
+                      <span>Xem dịch vụ</span>
                     </button>
                   </div>
 
-                  <div className="hero-stats md:!justify-start" style={{ display: "flex", gap: 28, marginTop: 32, paddingTop: 20, borderTop: `1px solid ${BORDER}`, flexWrap: "wrap", justifyContent: "center" }}>
+                  {/* Stats counter */}
+                  <div className="hero-stats flex items-center justify-center md:justify-start gap-8 sm:gap-10 mt-7 pt-5 border-t border-white/10 w-full max-w-xs mx-auto md:max-w-none md:mx-0">
                     {[["500+","Dự án"],["5 ngày","Giao hàng"],["24/7","Hỗ trợ"]].map(([n,l]) => (
-                      <div key={l}>
-                        <div style={{ color: TEXT, fontSize: 20, fontWeight: 700, letterSpacing: "-0.03em" }}>{n}</div>
+                      <div key={l} className="text-center md:text-left">
+                        <div style={{ color: TEXT, fontSize: 20, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.2 }}>{n}</div>
                         <div style={{ color: TEXT35, fontSize: 11, marginTop: 2 }}>{l}</div>
                       </div>
                     ))}
@@ -170,9 +199,9 @@ export function HeroCarousel() {
               </AnimatePresence>
             </div>
 
-            {/* Right – 9:16 Vertical Video Ad (To hơn, đè lên banner với bố cục layer tinh tế) */}
+            {/* Right – 9:16 Vertical Video Ad (order-2 trên mobile, order-2 trên desktop) */}
             <div
-              className="hero-banner-ad-showcase order-1 md:order-2 w-full flex flex-col items-center justify-center relative md:translate-y-[-8px] lg:translate-y-[-14px]"
+              className="hero-banner-ad-showcase order-2 md:order-2 w-full flex flex-col items-center justify-center relative md:translate-y-[-8px] lg:translate-y-[-14px]"
               style={{
                 zIndex: 10,
               }}
@@ -274,7 +303,7 @@ export function HeroCarousel() {
                   posterSrc={GOOGLE_PRO_MEDIA.banner.posterUrl}
                   stopSeconds={8}
                   ctaLink="/google-pro"
-                  className="max-w-[325px] sm:max-w-[360px] md:max-w-[385px] lg:max-w-[415px] xl:max-w-[430px]"
+                  className="max-w-[260px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[370px]"
                 />
               </div>
             </div>
