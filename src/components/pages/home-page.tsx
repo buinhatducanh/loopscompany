@@ -1,6 +1,7 @@
 "use client";
 
 import { HeroCarousel } from "@/sections/HeroCarousel";
+import { MobileFullScreenVideoIntro } from "@/components/ads/MobileFullScreenVideoIntro";
 import { Marquee } from "@/sections/Marquee";
 import { WhySection } from "@/sections/WhySection";
 import { ProcessSection } from "@/sections/ProcessSection";
@@ -8,6 +9,7 @@ import { BlogPreviewSection } from "@/sections/BlogPreviewSection";
 import { ContactSection } from "@/sections/ContactSection";
 import { CreativeVisionSection } from "@/sections/CreativeVisionSection";
 import { ServiceEcosystemSection } from "@/sections/ServiceEcosystemSection";
+import { GoogleProAdSpotlightSection } from "@/components/sections/GoogleProAdSpotlightSection";
 import { ProjectMuseumSection } from "@/sections/ProjectMuseumSection";
 import { WebsiteRentalPricingSection } from "@/sections/WebsiteRentalPricingSection";
 import { useSiteData } from "@/features/legacy-core/SiteDataContext";
@@ -34,8 +36,10 @@ export function HomePage() {
 
   return (
     <>
+      <MobileFullScreenVideoIntro targetBannerId="main-banner" />
       {visibility.hero !== false && <HeroCarousel />}
       {visibility.marquee !== false && <Marquee />}
+      <GoogleProAdSpotlightSection />
       {visibility.creativeVision !== false && <CreativeVisionSection />}
       {visibility.service !== false && <ServiceEcosystemSection />}
       {visibility.whyChooseUs !== false && <WhySection />}

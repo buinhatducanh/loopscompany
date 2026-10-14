@@ -3,7 +3,7 @@ const q = "?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=";
 
 export const IMG = {
   // Hero slides
-  heroBg:     U+"photo-1748591646636-ad5132fed078"+q+"1920&q=85",
+  heroBg:     "/img/woman_office_google_pro.jpg",
   hero2:      U+"photo-1556742502-ec7c0e9f34b6"+q+"1920&q=85",
   hero3:      U+"photo-1460925895917-afdab827c52f"+q+"1920&q=85",
   // Section backgrounds

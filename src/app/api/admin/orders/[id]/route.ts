@@ -12,13 +12,35 @@ export async function PATCH(
   }
 
   try {
-    const { status } = await request.json();
+    const body = await request.json();
+    const { status, details, activationLink } = body;
     const resolvedParams = await params;
-    await prisma.order.update({
+
+    const existing = await prisma.order.findUnique({
       where: { id: resolvedParams.id },
-      data: { status },
     });
-    return NextResponse.json({ success: true });
+
+    if (!existing) {
+      return NextResponse.json({ error: "Không tìm thấy đơn hàng" }, { status: 404 });
+    }
+
+    const currentDetails = (existing.details as Record<string, unknown>) || {};
+    let updatedDetails = details ? { ...currentDetails, ...details } : currentDetails;
+
+    if (activationLink) {
+      updatedDetails = { ...updatedDetails, activationLink: activationLink.trim() };
+    }
+
+    const updateData: any = {};
+    if (status) updateData.status = status;
+    if (details || activationLink) updateData.details = updatedDetails;
+
+    const updated = await prisma.order.update({
+      where: { id: resolvedParams.id },
+      data: updateData,
+    });
+
+    return NextResponse.json({ success: true, order: updated });
   } catch (error) {
     return NextResponse.json(
       { error: "Lỗi khi cập nhật trạng thái đơn hàng" },

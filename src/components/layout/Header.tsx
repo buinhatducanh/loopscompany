@@ -6,11 +6,13 @@ import { Globe, Menu, X, Sun, Moon, User, LogOut } from 'lucide-react';
 import { useTheme } from '@/features/legacy-core/theme-context';
 import { SITE } from '@/lib/site';
 import Link from 'next/link';
+import { HeaderAdStory } from './HeaderAdStory';
 
 const F = "inherit";
 
 const NAV = [
   { label: 'Dịch vụ', href: '/#services'  },
+  { label: 'Google Pro 299K', href: '/google-pro' },
   { label: 'Dự án',   href: '/du-an' },
   { label: 'Báo giá', href: '/bao-gia'   },
   { label: 'Đội ngũ', href: '/doi-ngu'    },
@@ -148,10 +150,13 @@ export function Header() {
           boxShadow: 'var(--sc-header-shadow, 0 8px 32px rgba(0, 0, 0, 0.05))',
           overflow: 'visible',
         }}>
-          {/* Logo */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', flexShrink: 0 }}>
-            <img src={logoSrc} alt="LOOP Logo" style={{ height: '42px', objectFit: 'contain' }} />
-          </Link>
+          {/* Logo & Story Ad */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', flexShrink: 0 }}>
+              <img src={logoSrc} alt="LOOP Logo" style={{ height: '42px', objectFit: 'contain' }} />
+            </Link>
+            <HeaderAdStory />
+          </div>
 
           {/* Desktop links — hidden on mobile via display none at <768px */}
           <div style={{ gap: 'clamp(16px,2.5vw,28px)', alignItems: 'center' }} className="hidden md:flex">
@@ -495,6 +500,30 @@ export function Header() {
                 <span style={{ color: 'var(--sc-accent)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '8px', fontFamily: F }}>
                   Danh mục điều hướng
                 </span>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  style={{ width: '100%', marginBottom: '12px' }}
+                >
+                  <Link
+                    href="/google-pro"
+                    onClick={() => setMenu(false)}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      background: 'linear-gradient(135deg, rgba(66, 133, 244, 0.18) 0%, rgba(52, 168, 83, 0.18) 100%)',
+                      border: '1px solid rgba(66, 133, 244, 0.35)',
+                      borderRadius: '16px', padding: '12px 18px', textDecoration: 'none',
+                      color: 'var(--sc-text)', width: '100%', boxSizing: 'border-box'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '15px', fontWeight: 800 }}>⚡ Google Pro 18 Tháng</span>
+                      <span style={{ background: '#ef4444', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '2px 7px', borderRadius: '999px' }}>299K</span>
+                    </div>
+                    <span style={{ color: 'var(--sc-accent)', fontSize: '12px', fontWeight: 700 }}>Chi tiết →</span>
+                  </Link>
+                </motion.div>
                 
                 {NAV.map((l, i) => (
                   <motion.div

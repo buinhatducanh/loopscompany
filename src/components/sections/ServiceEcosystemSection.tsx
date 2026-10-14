@@ -24,6 +24,17 @@ interface ServiceItem {
 
 const STATIC_SERVICES = [
   {
+    num: 'HOT', label: 'Google Pro 18 Tháng (5TB & AI)',
+    sub: 'Nâng cấp 5TB Drive & Gemini 3.8 Flash AI chính chủ chỉ 299K. Tự động kích hoạt trong 30s.',
+    img: '/img/ads-google-pro-stopped.jpg',
+    accent: '#4285F4',
+    tags: ['5TB Drive', 'Gemini AI', 'Chỉ 299K'],
+    size: 'large',
+    objectPosition: 'center',
+    glassBg: 'linear-gradient(135deg, rgba(66, 133, 244, 0.45) 0%, rgba(52, 168, 83, 0.45) 100%)',
+    link: '/google-pro',
+  },
+  {
     num: '01', label: 'Tạo Website',
     sub: 'Landing page, web app, thương mại điện tử chuyên nghiệp.',
     img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',

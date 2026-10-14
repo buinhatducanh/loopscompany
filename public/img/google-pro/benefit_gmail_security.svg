@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="600" height="340">
+  <defs>
+    <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181122"/>
+      <stop offset="100%" stop-color="#07080c"/>
+    </linearGradient>
+    <radialGradient id="secGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#d43b1f" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#07080c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="shadow5" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#a855f7" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="340" rx="24" fill="url(#bgGrad5)"/>
+  <rect width="600" height="340" rx="24" fill="url(#secGlow)"/>
+  <rect width="598" height="338" x="1" y="1" rx="23" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+
+  <!-- Google Security Shield & Lock Icon -->
+  <g transform="translate(300, 115)" filter="url(#shadow5)">
+    <circle r="60" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+    <circle r="46" fill="rgba(0,0,0,0.5)"/>
+
+    <!-- Shield Outline -->
+    <path d="M0 -30 L26 -18 C26 12 12 30 0 38 C-12 30 -26 12 -26 -18 Z" fill="url(#shieldGrad)"/>
+    
+    <!-- Lock inside Shield -->
+    <!-- Shackle -->
+    <path d="M-8 -6 A8 8 0 0 1 8 -6 L8 0 L-8 0 Z" fill="none" stroke="#fff" stroke-width="3"/>
+    <!-- Body -->
+    <rect x="-11" y="0" width="22" height="16" rx="4" fill="#fff"/>
+    <circle cx="0" cy="8" r="2.5" fill="#7c3aed"/>
+  </g>
+
+  <!-- Security 100% Privacy Badge -->
+  <g transform="translate(120, 215)">
+    <rect width="360" height="74" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+    <!-- Status Pill -->
+    <rect x="18" y="14" width="76" height="20" rx="10" fill="rgba(168, 85, 247, 0.18)" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1"/>
+    <text x="56" y="28" fill="#d8b4fe" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">NO PASS</text>
+
+    <text x="104" y="28" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Bảo Mật Gmail Riêng Tư 100%</text>
+
+    <text x="18" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Không yêu cầu mật khẩu. Không ai có quyền truy cập vào file của bạn.</text>
+  </g>
+</svg>

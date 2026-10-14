@@ -11,6 +11,7 @@ const COLS = [
   {
     title: "Dịch vụ",
     links: [
+      { label: "Google Pro 18 Tháng", href: "/google-pro" },
       { label: "Landing Page", href: "/#services" },
       { label: "Cửa hàng online", href: "/#services" },
       { label: "Website doanh nghiệp", href: "/#services" },
@@ -33,7 +34,8 @@ const COLS = [
     links: [
       { label: "Đội ngũ", href: "/doi-ngu" },
       { label: "Danh mục dự án", href: "/du-an" },
-      { label: "Blog & Kiến thức", href: "/bai-viet" }
+      { label: "Blog & Kiến thức", href: "/bai-viet" },
+      { label: "Tra cứu đơn hàng", href: "/google-pro/tra-cuu" }
     ]
   },
 ];
@@ -56,8 +58,8 @@ export function Footer() {
             <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, textDecoration: "none" }}>
               <img src={logoSrc} alt="LOOP Logo" style={{ height: '42px', objectFit: 'contain' }} />
             </Link>
-            <p style={{ color: TEXT60, fontSize: 13, lineHeight: 1.7, margin: "0 0 16px", maxWidth: 240 }}>
-              Đơn vị thiết kế và cho thuê website chuyên nghiệp hàng đầu cho doanh nghiệp Việt Nam.
+            <p style={{ color: TEXT60, fontSize: 13, lineHeight: 1.7, margin: "0 0 16px", maxWidth: 280 }}>
+              Đơn vị thiết kế và cho thuê website chuyên nghiệp, đối tác giải pháp đám mây & AI bản quyền cho doanh nghiệp Việt Nam.
             </p>
             
             {/* Contact Details */}

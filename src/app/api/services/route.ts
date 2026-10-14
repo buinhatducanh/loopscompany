@@ -115,6 +115,29 @@ export async function GET(request: Request) {
       });
     }
 
+    // Đảm bảo dịch vụ Google Pro 18 Tháng luôn có trong danh sách dịch vụ chính
+    const hasGooglePro = services.some(s => s.id === "service_google_pro" || s.link === "/google-pro");
+    if (!hasGooglePro) {
+      await prisma.service.create({
+        data: {
+          id: "service_google_pro",
+          label: "Google Pro 18 Tháng",
+          sub: "Nâng cấp 5TB Drive & Gemini 3.8 Flash AI chính chủ chỉ 299K. Tự động kích hoạt 30s.",
+          img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+          tags: ["5TB Drive", "Gemini AI", "Chỉ 299K"],
+          size: "large",
+          glassBg: "linear-gradient(135deg, rgba(66, 133, 244, 0.4) 0%, rgba(52, 168, 83, 0.4) 100%)",
+          link: "/google-pro",
+          order: 0,
+          active: true,
+        }
+      }).catch(() => {});
+      services = await prisma.service.findMany({
+        where,
+        orderBy: { order: "asc" },
+      });
+    }
+
     return NextResponse.json(services);
   } catch (error) {
     console.error("Failed to fetch services:", error);

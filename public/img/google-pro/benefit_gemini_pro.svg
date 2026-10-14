@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="600" height="340">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#140f22"/>
+      <stop offset="100%" stop-color="#07080c"/>
+    </linearGradient>
+    <radialGradient id="geminiGlow" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#ec4899" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#07080c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="geminiStar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="35%" stop-color="#c084fc"/>
+      <stop offset="70%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#8b5cf6" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="340" rx="24" fill="url(#bgGrad2)"/>
+  <rect width="600" height="340" rx="24" fill="url(#geminiGlow)"/>
+  <rect width="598" height="338" x="1" y="1" rx="23" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+
+  <!-- Neural spark particles -->
+  <circle cx="120" cy="70" r="2" fill="#c084fc" opacity="0.6"/>
+  <circle cx="480" cy="90" r="3" fill="#60a5fa" opacity="0.5"/>
+  <circle cx="510" cy="220" r="2.5" fill="#f472b6" opacity="0.4"/>
+  <circle cx="100" cy="240" r="2" fill="#f59e0b" opacity="0.5"/>
+
+  <!-- Gemini AI Iconic Star -->
+  <g transform="translate(300, 115)" filter="url(#shadow2)">
+    <circle r="60" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+    <circle r="46" fill="rgba(0,0,0,0.5)"/>
+
+    <!-- Official 4-point curved Gemini diamond shape -->
+    <path d="M0 -38 C0 -8 8 0 38 0 C8 0 0 8 0 38 C0 8 -8 0 -38 0 C-8 0 0 -8 0 -38 Z" fill="url(#geminiStar)"/>
+    <!-- Secondary small sparkle -->
+    <path d="M22 -22 C22 -12 26 -8 36 -8 C26 -8 22 -4 22 6 C22 -4 18 -8 8 -8 C18 -8 22 -12 22 -22 Z" fill="#fff" opacity="0.9"/>
+  </g>
+
+  <!-- Gemini Pro AI Dialog Card -->
+  <g transform="translate(110, 215)">
+    <rect width="380" height="74" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+    
+    <!-- Mini AI Prompt Pill -->
+    <rect x="18" y="14" width="70" height="20" rx="10" fill="rgba(192, 132, 252, 0.2)" stroke="rgba(192, 132, 252, 0.4)" stroke-width="1"/>
+    <text x="53" y="28" fill="#e9d5ff" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">PRO 1.5</text>
+
+    <text x="98" y="28" fill="#f1f5f9" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Gemini Advanced Tích Hợp Gmail &amp; Docs</text>
+    
+    <text x="18" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Hỗ trợ viết content, lập trình, tóm tắt PDF và xử lý dữ liệu thông minh.</text>
+  </g>
+</svg>
