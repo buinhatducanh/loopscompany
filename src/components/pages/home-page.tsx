@@ -1,7 +1,6 @@
 "use client";
 
 import { HeroCarousel } from "@/sections/HeroCarousel";
-import { MobileFullScreenVideoIntro } from "@/components/ads/MobileFullScreenVideoIntro";
 import { Marquee } from "@/sections/Marquee";
 import { WhySection } from "@/sections/WhySection";
 import { ProcessSection } from "@/sections/ProcessSection";
@@ -36,7 +35,6 @@ export function HomePage() {
 
   return (
     <>
-      <MobileFullScreenVideoIntro targetBannerId="main-banner" />
       {visibility.hero !== false && <HeroCarousel />}
       {visibility.marquee !== false && <Marquee />}
       <GoogleProAdSpotlightSection />

@@ -11,7 +11,6 @@ const F = "inherit";
 
 const NAV = [
   { label: 'Dịch vụ', href: '/#services' },
-  { label: 'Google Pro', href: '/google-pro', badge: '299K' },
   { label: 'Dự án',   href: '/du-an' },
   { label: 'Báo giá', href: '/bao-gia'   },
   { label: 'Đội ngũ', href: '/doi-ngu'    },
@@ -155,42 +154,14 @@ export function Header() {
           </Link>
 
           {/* Desktop links — hidden on mobile via display none at <768px */}
-          <div style={{ gap: 'clamp(14px,2.2vw,24px)', alignItems: 'center' }} className="hidden md:flex">
+          <div style={{ gap: 'clamp(16px,2.5vw,28px)', alignItems: 'center' }} className="hidden md:flex">
             {NAV.map(l => (
               <Link key={l.label} href={l.href}
                 onClick={e => goTo(l.href, e)}
-                style={{
-                  color: l.badge ? '#3b82f6' : textMuted,
-                  fontSize: '13px',
-                  fontFamily: F,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px'
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = l.badge ? '#60a5fa' : textColor}
-                onMouseLeave={e => e.currentTarget.style.color = l.badge ? '#3b82f6' : textMuted}
-              >
-                <span>{l.label}</span>
-                {l.badge && (
-                  <span style={{
-                    backgroundColor: 'rgba(239, 68, 68, 0.12)',
-                    color: '#ef4444',
-                    border: '1px solid rgba(239, 68, 68, 0.25)',
-                    fontSize: '9.5px',
-                    fontWeight: 700,
-                    padding: '1px 5px',
-                    borderRadius: '9999px',
-                    lineHeight: '1.2',
-                    letterSpacing: '0.02em'
-                  }}>
-                    {l.badge}
-                  </span>
-                )}
-              </Link>
+                style={{ color: textMuted, fontSize: '13px', fontFamily: F, fontWeight: 600, textDecoration: 'none', transition: 'color 0.2s', whiteSpace: 'nowrap' }}
+                onMouseEnter={e => e.currentTarget.style.color = textColor}
+                onMouseLeave={e => e.currentTarget.style.color = textMuted}
+              >{l.label}</Link>
             ))}
           </div>
 
@@ -525,31 +496,7 @@ export function Header() {
                   Danh mục điều hướng
                 </span>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{ width: '100%', marginBottom: '12px' }}
-                >
-                  <Link
-                    href="/google-pro"
-                    onClick={() => setMenu(false)}
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      background: 'linear-gradient(135deg, rgba(66, 133, 244, 0.18) 0%, rgba(52, 168, 83, 0.18) 100%)',
-                      border: '1px solid rgba(66, 133, 244, 0.35)',
-                      borderRadius: '16px', padding: '12px 18px', textDecoration: 'none',
-                      color: 'var(--sc-text)', width: '100%', boxSizing: 'border-box'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontSize: '15px', fontWeight: 800 }}>⚡ Google Pro 18 Tháng</span>
-                      <span style={{ background: '#ef4444', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '2px 7px', borderRadius: '999px' }}>299K</span>
-                    </div>
-                    <span style={{ color: 'var(--sc-accent)', fontSize: '12px', fontWeight: 700 }}>Chi tiết →</span>
-                  </Link>
-                </motion.div>
-                
-                {NAV.filter(l => l.href !== '/google-pro').map((l, i) => (
+                {NAV.map((l, i) => (
                   <motion.div
                     key={l.label}
                     initial={{ opacity: 0, x: -20 }}

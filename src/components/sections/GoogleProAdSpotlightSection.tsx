@@ -5,9 +5,7 @@ import Link from "next/link";
 import { motion, useInView } from "motion/react";
 import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Bot, Cloud, Sparkles } from "lucide-react";
 import { VerticalAdVideo } from "@/components/ads/VerticalAdVideo";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Orb } from "@/components/ui/SectionBg";
-import { RED, RED_DIM, TEXT, TEXT60, TEXT35, BORDER, BORDER_M, GLASS, EASE } from "@/features/legacy-core/tokens";
+import { RED, TEXT, TEXT60, TEXT35, BORDER, GLASS, EASE } from "@/features/legacy-core/tokens";
 import { GOOGLE_PRO_MEDIA } from "@/lib/google-pro-config";
 
 export function GoogleProAdSpotlightSection() {
@@ -19,326 +17,357 @@ export function GoogleProAdSpotlightSection() {
       id="google-pro-spotlight"
       style={{
         position: "relative",
-        padding: "96px 20px",
+        padding: "clamp(64px, 8vw, 100px) 20px",
         overflow: "hidden",
         backgroundColor: "var(--vw-bg)",
       }}
     >
-      {/* Dynamic ambient Orbs matching project theme */}
-      <Orb size={650} opacity={0.22} color="var(--sc-orb-1-bg)" top="10%" left="-10%" delay={1} />
-      <Orb size={450} opacity={0.18} color="rgba(66, 133, 244, 0.4)" bottom="5%" right="-8%" delay={3} />
+      {/* Subtle ambient lighting matching LOOP luxury branding */}
+      <div
+        style={{
+          position: "absolute",
+          top: "20%",
+          left: "5%",
+          width: 500,
+          height: 500,
+          background: "radial-gradient(circle, rgba(212,59,31,0.08) 0%, transparent 70%)",
+          filter: "blur(60px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "5%",
+          width: 450,
+          height: 450,
+          background: "radial-gradient(circle, rgba(250,204,21,0.06) 0%, transparent 70%)",
+          filter: "blur(70px)",
+          pointerEvents: "none",
+        }}
+      />
 
       <div
         ref={sectionRef}
         style={{
           position: "relative",
           zIndex: 2,
-          maxWidth: 1280,
+          maxWidth: 1160,
           margin: "0 auto",
         }}
       >
-        {/* Main Card Container with Project Theme Glassmorphism */}
+        {/* Luxury Bento Showcase Card */}
         <motion.div
-          initial={{ opacity: 0, y: 36 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: EASE }}
+          transition={{ duration: 0.7, ease: EASE }}
           style={{
             ...GLASS,
-            borderRadius: 36,
-            padding: "clamp(28px, 4vw, 56px)",
+            borderRadius: 32,
+            padding: "clamp(24px, 4vw, 48px)",
             position: "relative",
             overflow: "hidden",
-            boxShadow: "0 24px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(212, 59, 31, 0.08)",
-            border: `1px solid ${BORDER}`,
+            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.55), 0 0 30px rgba(212, 59, 31, 0.05)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+            background: "linear-gradient(145deg, rgba(22, 22, 26, 0.75) 0%, rgba(12, 12, 15, 0.92) 100%)",
           }}
         >
-          {/* Subtle top edge highlight */}
+          {/* Top highlight bar */}
           <div
             style={{
               position: "absolute",
               top: 0,
-              left: "10%",
-              right: "10%",
+              left: "15%",
+              right: "15%",
               height: 1,
-              background: `linear-gradient(90deg, transparent 0%, ${RED} 50%, transparent 100%)`,
-              opacity: 0.6,
+              background: `linear-gradient(90deg, transparent 0%, rgba(212,59,31,0.6) 50%, transparent 100%)`,
             }}
           />
 
-          <div
-            className="flex flex-col lg:grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-14 items-center"
-          >
-            {/* 1. KHUNG VIDEO: Đưa lên TRÊN CÙNG khi ở mobile (order-1 lg:order-2) */}
-            <div
-              className="order-1 lg:order-2 w-full flex flex-col items-center justify-center relative"
-            >
-              {/* Vầng sáng phía sau video */}
+          <div className="flex flex-col lg:grid lg:grid-cols-[1.25fr_0.75fr] gap-8 lg:gap-12 items-center">
+            {/* CỘT THÔNG TIN & TÍNH NĂNG */}
+            <div className="flex flex-col text-left items-start w-full">
+              {/* Pill Badge */}
               <div
                 style={{
-                  position: "absolute",
-                  width: "100%",
-                  maxWidth: 380,
-                  height: 520,
-                  background: `radial-gradient(circle, rgba(212,59,31,0.24) 0%, rgba(66,133,244,0.18) 50%, transparent 70%)`,
-                  filter: "blur(50px)",
-                  zIndex: 0,
-                  pointerEvents: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 7,
+                  backgroundColor: "rgba(212, 59, 31, 0.12)",
+                  border: "1px solid rgba(212, 59, 31, 0.3)",
+                  borderRadius: 9999,
+                  padding: "5px 14px",
+                  marginBottom: 14,
                 }}
-              />
-
-              {/* Component Video 9:16 - Lấy đúng ảnh D:\LOOP_COMPANY\ASSETS\Media\aa2dd096-fce4-4e1a-82c8-3fbc6cb53e84.jpg */}
-              <div style={{ position: "relative", zIndex: 2, width: "100%", display: "flex", justifyContent: "center" }}>
-                <VerticalAdVideo
-                  videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
-                  posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
-                  stopSeconds={8}
-                  ctaLink="/google-pro"
-                  title="Google Pro 18 Tháng — 5TB & AI"
-                  price="299.000đ"
-                  discountText="Ưu Đãi Đặc Biệt — 299K"
-                  badge="HOT DEAL 299K"
-                  className="max-w-[340px] sm:max-w-[360px] md:max-w-[370px]"
-                />
-              </div>
-            </div>
-
-            {/* 2. CỘT THÔNG TIN: Đặt DƯỚI VIDEO khi ở mobile (order-2 lg:order-1) */}
-            <div
-              className="order-2 lg:order-1 w-full flex flex-col text-center lg:text-left items-center lg:items-start"
-            >
-              {/* Nhãn Section chuẩn theme */}
-              <div>
-                <SectionLabel>DỊCH VỤ NỔI BẬT · ƯU ĐÃI ĐỘC QUYỀN 299K</SectionLabel>
+              >
+                <Sparkles size={13} color="#f87171" />
+                <span
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "#fca5a5",
+                  }}
+                >
+                  Dịch vụ độc quyền · Giới hạn 299K
+                </span>
               </div>
 
-              {/* Tiêu đề chuẩn theme */}
+              {/* Headline */}
               <h2
                 style={{
-                  fontSize: "clamp(26px, 3.6vw, 44px)",
+                  fontSize: "clamp(24px, 3.2vw, 38px)",
                   fontWeight: 800,
-                  color: TEXT,
-                  letterSpacing: "-0.035em",
-                  lineHeight: 1.15,
-                  margin: "6px 0 16px",
+                  color: "#ffffff",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.25,
+                  margin: "0 0 12px",
                 }}
               >
                 Nâng Cấp <span style={{ color: RED }}>Google Pro 18 Tháng</span>
-                <br />
-                Chỉ <span style={{ color: "#facc15" }}>299.000đ</span>{" "}
-                <em
+                <span
                   style={{
-                    fontStyle: "italic",
-                    fontWeight: 400,
-                    fontSize: "0.62em",
-                    color: TEXT35,
-                    letterSpacing: "normal",
+                    display: "block",
+                    fontSize: "0.78em",
+                    marginTop: 6,
+                    color: "rgba(255, 255, 255, 0.9)",
+                    fontWeight: 700,
                   }}
                 >
-                  (Gốc 1.850.000đ)
-                </em>
+                  Trọn Gói 5TB &amp; Gemini AI ·{" "}
+                  <span style={{ color: "#facc15" }}>299.000đ</span>
+                  <span
+                    style={{
+                      marginLeft: 8,
+                      fontSize: "0.75em",
+                      color: TEXT35,
+                      textDecoration: "line-through",
+                      fontWeight: 400,
+                    }}
+                  >
+                    1.850.000đ
+                  </span>
+                </span>
               </h2>
 
-              {/* Mô tả chi tiết */}
+              {/* Description */}
               <p
                 style={{
                   color: TEXT60,
-                  fontSize: "clamp(14px, 1.15vw, 16px)",
-                  lineHeight: 1.75,
-                  margin: "0 0 28px",
-                  maxWidth: 560,
+                  fontSize: "clamp(13px, 1.05vw, 15px)",
+                  lineHeight: 1.65,
+                  margin: "0 0 18px",
+                  maxWidth: 540,
                 }}
               >
-                Mở rộng tức thì <strong style={{ color: TEXT }}>5.000 GB (5TB) Google Drive & Photos</strong> cùng
-                đặc quyền trí tuệ nhân tạo đỉnh cao <strong style={{ color: TEXT }}>Gemini 3.8 Flash &amp; Advanced AI</strong> tích hợp
-                trực tiếp trên tài khoản Gmail chính chủ của bạn.
+                Mở rộng ngay <strong style={{ color: TEXT }}>5.000 GB (5TB) Google Drive & Photos</strong> cùng
+                trợ lý trí tuệ nhân tạo <strong style={{ color: TEXT }}>Gemini 3.8 Flash &amp; Advanced AI</strong> trên
+                chính Gmail cá nhân của bạn — an toàn, bảo mật và tiện lợi.
               </p>
 
-              {/* Lưới 4 tính năng cam kết chuẩn Glass theme */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                  gap: 12,
-                  marginBottom: 32,
-                  width: "100%",
-                }}
-                className="text-left"
-              >
+              {/* VIDEO MOCKUP TRÊN MOBILE (chỉ hiện trên màn hình < 1024px) */}
+              <div className="w-full flex lg:hidden items-center justify-center my-3 relative">
                 <div
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.03)",
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: 16,
-                    padding: "12px 14px",
+                    position: "absolute",
+                    width: "100%",
+                    maxWidth: 240,
+                    height: 320,
+                    background: "radial-gradient(circle, rgba(212,59,31,0.18) 0%, rgba(66,133,244,0.1) 50%, transparent 70%)",
+                    filter: "blur(35px)",
+                    zIndex: 0,
+                    pointerEvents: "none",
+                  }}
+                />
+                <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
+                  <VerticalAdVideo
+                    videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
+                    posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
+                    stopSeconds={8}
+                    ctaLink="/google-pro"
+                    className="max-w-[240px] sm:max-w-[270px]"
+                  />
+                </div>
+              </div>
+
+              {/* 4 Bento Feature Items (2 cột gọn gàng) */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-2.5 mb-6 w-full">
+                <div
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.025)",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    borderRadius: 14,
+                    padding: "10px 12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: 10,
+                    gap: 9,
                   }}
                 >
                   <div
                     style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: 10,
-                      backgroundColor: "rgba(66, 133, 244, 0.15)",
+                      width: 28,
+                      height: 28,
+                      borderRadius: 8,
+                      backgroundColor: "rgba(66, 133, 244, 0.12)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Cloud size={16} color="#60a5fa" />
+                    <Cloud size={14} color="#60a5fa" />
                   </div>
-                  <span style={{ fontSize: 13, color: TEXT, fontWeight: 500 }}>
-                    5.000 GB (5TB) dung lượng Drive trọn gói
+                  <span style={{ fontSize: 12, color: TEXT, fontWeight: 600, lineHeight: 1.3 }}>
+                    5.000 GB (5TB) Drive
                   </span>
                 </div>
 
                 <div
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.03)",
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: 16,
-                    padding: "12px 14px",
+                    backgroundColor: "rgba(255, 255, 255, 0.025)",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    borderRadius: 14,
+                    padding: "10px 12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: 10,
+                    gap: 9,
                   }}
                 >
                   <div
                     style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: 10,
-                      backgroundColor: "rgba(52, 168, 83, 0.15)",
+                      width: 28,
+                      height: 28,
+                      borderRadius: 8,
+                      backgroundColor: "rgba(52, 168, 83, 0.12)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Bot size={16} color="#4ade80" />
+                    <Bot size={14} color="#4ade80" />
                   </div>
-                  <span style={{ fontSize: 13, color: TEXT, fontWeight: 500 }}>
-                    Gemini 3.8 Flash &amp; Advanced AI
+                  <span style={{ fontSize: 12, color: TEXT, fontWeight: 600, lineHeight: 1.3 }}>
+                    Gemini 3.8 Flash AI
                   </span>
                 </div>
 
                 <div
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.03)",
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: 16,
-                    padding: "12px 14px",
+                    backgroundColor: "rgba(255, 255, 255, 0.025)",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    borderRadius: 14,
+                    padding: "10px 12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: 10,
+                    gap: 9,
                   }}
                 >
                   <div
                     style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: 10,
-                      backgroundColor: RED_DIM,
+                      width: 28,
+                      height: 28,
+                      borderRadius: 8,
+                      backgroundColor: "rgba(212, 59, 31, 0.12)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <ShieldCheck size={16} color={RED} />
+                    <ShieldCheck size={14} color="#f87171" />
                   </div>
-                  <span style={{ fontSize: 13, color: TEXT, fontWeight: 500 }}>
-                    Không cần mật khẩu · Dữ liệu an toàn
+                  <span style={{ fontSize: 12, color: TEXT, fontWeight: 600, lineHeight: 1.3 }}>
+                    Gmail chính chủ 100%
                   </span>
                 </div>
 
                 <div
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.03)",
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: 16,
-                    padding: "12px 14px",
+                    backgroundColor: "rgba(255, 255, 255, 0.025)",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    borderRadius: 14,
+                    padding: "10px 12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: 10,
+                    gap: 9,
                   }}
                 >
                   <div
                     style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: 10,
-                      backgroundColor: "rgba(250, 204, 21, 0.15)",
+                      width: 28,
+                      height: 28,
+                      borderRadius: 8,
+                      backgroundColor: "rgba(250, 204, 21, 0.12)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Zap size={16} color="#facc15" />
+                    <Zap size={14} color="#facc15" />
                   </div>
-                  <span style={{ fontSize: 13, color: TEXT, fontWeight: 500 }}>
-                    Tự động kích hoạt trong 30 giây
+                  <span style={{ fontSize: 12, color: TEXT, fontWeight: 600, lineHeight: 1.3 }}>
+                    Kích hoạt trong 30 giây
                   </span>
                 </div>
               </div>
 
-              {/* Nút hành động CTA & Social Proof */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 18,
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                }}
-                className="lg:!justify-start w-full"
-              >
+              {/* CTA & Proof */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full">
                 <Link
                   href="/google-pro"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: 10,
-                    backgroundColor: RED,
-                    color: "#fff",
-                    borderRadius: 40,
-                    padding: "14px 28px",
-                    fontSize: 15,
+                    gap: 8,
+                    background: "linear-gradient(135deg, #d43b1f 0%, #b82e14 100%)",
+                    color: "#ffffff",
+                    borderRadius: 9999,
+                    padding: "13px 28px",
+                    fontSize: 14,
                     fontWeight: 700,
                     textDecoration: "none",
-                    boxShadow: "0 12px 30px rgba(212,59,31,0.4)",
-                    transition: "all 0.2s ease",
+                    boxShadow: "0 10px 25px rgba(212, 59, 31, 0.35)",
+                    transition: "all 0.25s ease",
                   }}
-                  className="w-full sm:w-auto"
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = "#bb3218";
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = RED;
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                  }}
+                  className="w-full sm:w-auto hover:brightness-110 active:scale-95 text-center"
                 >
-                  <span>⚡ XEM CHI TIẾT & NHẬN LINK 299K</span>
-                  <ArrowRight size={16} />
+                  <span>Xem Chi Tiết &amp; Nhận Link 299K</span>
+                  <ArrowRight size={15} />
                 </Link>
 
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    color: TEXT35,
-                    fontSize: 12.5,
-                  }}
-                >
-                  <CheckCircle2 size={16} color="#4ade80" />
-                  <span>Hơn 3.400+ khách hàng đã tin dùng</span>
+                <div className="inline-flex items-center gap-2 text-xs text-slate-400">
+                  <CheckCircle2 size={14} className="text-emerald-400 flex-shrink-0" />
+                  <span>Bảo hành 18T · Hơn 3.400+ khách hàng tin dùng</span>
                 </div>
+              </div>
+            </div>
+
+            {/* CỘT SMARTPHONE MOCKUP VIDEO CHO DESKTOP (chỉ hiện trên lg) */}
+            <div className="hidden lg:flex w-full items-center justify-center relative">
+              <div
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  maxWidth: 280,
+                  height: 380,
+                  background: "radial-gradient(circle, rgba(212,59,31,0.15) 0%, rgba(66,133,244,0.08) 50%, transparent 70%)",
+                  filter: "blur(40px)",
+                  zIndex: 0,
+                  pointerEvents: "none",
+                }}
+              />
+              <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
+                <VerticalAdVideo
+                  videoSrc={GOOGLE_PRO_MEDIA.videoUrl}
+                  posterSrc={GOOGLE_PRO_MEDIA.posterUrl}
+                  stopSeconds={8}
+                  ctaLink="/google-pro"
+                />
               </div>
             </div>
           </div>
