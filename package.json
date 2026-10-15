@@ -6,9 +6,9 @@
     "seed": "tsx prisma/seed.ts"
   },
   "scripts": {
-    "dev": "node --max-old-space-size=4096 node_modules/next/dist/bin/next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
+    "dev": "node api.js && node --max-old-space-size=4096 node_modules/next/dist/bin/next dev",
+    "build": "node api.js && prisma generate && next build",
+    "start": "node api.js && next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
