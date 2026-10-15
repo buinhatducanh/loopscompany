@@ -33,6 +33,7 @@ const QUICK_PROMPTS = [
 
 export function LoopsChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [view, setView] = useState<"chat" | "history">("chat");
 
   // Thông tin người dùng (Guest vs Logged-in User)
@@ -295,14 +296,31 @@ export function LoopsChatWidget() {
 
   return (
     <>
+      {/* Keyframes đồng bộ hiệu ứng sóng radar và rung chuông như Zalo */}
       <style>{`
-        .loops-chat-btn-glow {
-          box-shadow: 0 8px 32px rgba(200, 162, 97, 0.4), inset 0 0 12px rgba(255, 255, 255, 0.3);
-          animation: loopsPulseGlow 3s ease-in-out infinite;
+        @keyframes loopsBotWavePulse {
+          0% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.35); opacity: 0.35; }
+          100% { transform: scale(1.75); opacity: 0; }
         }
-        @keyframes loopsPulseGlow {
-          0%, 100% { transform: scale(1); filter: brightness(1); }
-          50% { transform: scale(1.04); filter: brightness(1.15); }
+        @keyframes loopsBotRinging {
+          0% { transform: rotate(0deg) scale(1); }
+          15% { transform: rotate(-14deg) scale(1.1); }
+          30% { transform: rotate(14deg) scale(1.1); }
+          45% { transform: rotate(-14deg) scale(1.1); }
+          60% { transform: rotate(14deg) scale(1.1); }
+          75% { transform: rotate(-6deg) scale(1.05); }
+          90% { transform: rotate(6deg) scale(1.05); }
+          100% { transform: rotate(0deg) scale(1); }
+        }
+        .loops-bot-wave-1 {
+          animation: loopsBotWavePulse 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+        }
+        .loops-bot-wave-2 {
+          animation: loopsBotWavePulse 2.2s cubic-bezier(0.24, 0, 0.38, 1) 0.8s infinite;
+        }
+        .loops-bot-ringing {
+          animation: loopsBotRinging 0.7s ease-in-out infinite !important;
         }
         .loops-custom-scrollbar::-webkit-scrollbar {
           width: 5px;
@@ -328,78 +346,168 @@ export function LoopsChatWidget() {
             max-height: 100dvh !important;
             border-radius: 0 !important;
           }
-          .loops-chat-btn-root {
+          .floating-loops-bot-root {
             bottom: 88px !important;
             left: 16px !important;
           }
         }
       `}</style>
 
-      {/* 1. NÚT NỔI MỞ CHATBOT (GÓC DƯỚI BÊN TRÁI) */}
+      {/* 1. NÚT NỔI LOOPS CHAT BOT (ĐỒNG BỘ 1:1 THEO PHONG CÁCH FLOATING ZALO) */}
       <div
-        className="loops-chat-btn-root"
+        className="floating-loops-bot-root"
         style={{
           position: "fixed",
           bottom: 24,
           left: 24,
           zIndex: 45,
         }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <AnimatePresence>
-          {!isOpen && (
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="relative group cursor-pointer"
-              onClick={() => setIsOpen(true)}
-            >
-              {/* Badge thông báo AI trực tuyến */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: -8,
-                  right: -6,
-                  background: "linear-gradient(135deg, #FF6B6B 0%, #E63946 100%)",
-                  color: "#ffffff",
-                  fontSize: 10,
-                  fontWeight: 800,
-                  padding: "2px 7px",
-                  borderRadius: 999,
-                  boxShadow: "0 2px 8px rgba(230,57,70,0.5)",
-                  zIndex: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 3,
-                }}
-              >
-                <Sparkles size={10} /> LOOPS BOT
-              </div>
+        {/* Sóng radar tỏa tròn ánh vàng hoàng kim khi chờ */}
+        {!isOpen && !isHovered && (
+          <>
+            <div
+              className="loops-bot-wave-1 pointer-events-none"
+              style={{
+                position: "absolute",
+                inset: -6,
+                borderRadius: "50%",
+                background: "rgba(200, 162, 97, 0.45)",
+                zIndex: 0,
+              }}
+            />
+            <div
+              className="loops-bot-wave-2 pointer-events-none"
+              style={{
+                position: "absolute",
+                inset: -6,
+                borderRadius: "50%",
+                background: "rgba(200, 162, 97, 0.22)",
+                zIndex: 0,
+              }}
+            />
+          </>
+        )}
 
-              {/* Nút bấm hình tròn phong cách LOOPS Luxury */}
-              <button
-                type="button"
-                className="loops-chat-btn-glow"
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.5, type: "spring", stiffness: 260, damping: 20 }}
+          style={{ position: "relative", zIndex: 1 }}
+        >
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              borderRadius: 50,
+              background: isHovered || isOpen
+                ? "linear-gradient(135deg, #1C1A16 0%, #2A241A 100%)"
+                : "#ffffff",
+              boxShadow: isHovered || isOpen
+                ? "0 14px 40px rgba(200, 162, 97, 0.55), 0 0 25px rgba(200, 162, 97, 0.3)"
+                : "0 10px 28px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(200, 162, 97, 0.2)",
+              border: isHovered || isOpen
+                ? "1.5px solid rgba(200, 162, 97, 0.7)"
+                : "1.5px solid rgba(200, 162, 97, 0.35)",
+              padding: isHovered && !isOpen ? "8px 18px 8px 8px" : "6px",
+              transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+              cursor: "pointer",
+            }}
+          >
+            {/* Vòng tròn 48x48 chứa Icon Bot (Đồng bộ chuẩn kích thước với Zalo) */}
+            <div
+              style={{
+                position: "relative",
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                backgroundColor: isHovered || isOpen ? "rgba(200, 162, 97, 0.15)" : "#1C1A16",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                border: "1.5px solid rgba(200, 162, 97, 0.45)",
+                boxShadow: isHovered ? "0 4px 12px rgba(0,0,0,0.25)" : "none",
+              }}
+            >
+              <div
+                className={isHovered ? "loops-bot-ringing" : ""}
                 style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: "50%",
-                  background:
-                    "linear-gradient(135deg, #1C1A16 0%, #2A241A 50%, #C8A261 100%)",
-                  border: "1.5px solid rgba(200, 162, 97, 0.6)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#F6F1EA",
-                  cursor: "pointer",
+                  transformOrigin: "center center",
                 }}
               >
-                <Bot size={28} color="#C8A261" />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                <Bot size={26} color="#C8A261" />
+              </div>
+
+              {/* Chấm tròn xanh lá báo trạng thái Online 24/7 đồng bộ y hệt Zalo */}
+              <span
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor: "#22c55e",
+                  border: "2px solid #ffffff",
+                  boxShadow: "0 0 8px #22c55e",
+                }}
+              />
+            </div>
+
+            {/* THÔNG TIN MỞ RỘNG KHI HOVER (CHỈ HIỆN KHI RÀ CHUỘT, BUNG MƯỢT NHƯ ZALO) */}
+            <AnimatePresence>
+              {isHovered && !isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, width: 0, x: -10 }}
+                  animate={{ opacity: 1, width: "auto", x: 0 }}
+                  exit={{ opacity: 0, width: 0, x: -10 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  style={{
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    marginLeft: 12,
+                    display: "flex",
+                    flexDirection: "column",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 800,
+                        color: "#F6F1EA",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      LOOPS CHAT BOT
+                    </span>
+                    <Sparkles size={13} color="#C8A261" />
+                  </div>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: "#C8A261",
+                      marginTop: 1,
+                    }}
+                  >
+                    Tư vấn AI 24/7 • Báo giá ngay
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+        </motion.div>
       </div>
 
       {/* 2. CỬA SỔ HỘP THOẠI CHATBOT TRỰC TUYẾN */}
@@ -413,12 +521,12 @@ export function LoopsChatWidget() {
             className="loops-chat-container"
             style={{
               position: "fixed",
-              bottom: 24,
+              bottom: 96,
               left: 24,
               width: 395,
               maxWidth: "calc(100vw - 32px)",
               height: 590,
-              maxHeight: "calc(100vh - 100px)",
+              maxHeight: "calc(100vh - 120px)",
               background: "rgba(18, 16, 13, 0.96)",
               backdropFilter: "blur(24px)",
               WebkitBackdropFilter: "blur(24px)",
