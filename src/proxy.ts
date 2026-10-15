@@ -6,6 +6,12 @@ const secret = new TextEncoder().encode(
   process.env.AUTH_SECRET ?? "loops-dev-secret-change-in-production",
 );
 
+interface AdminSessionPayload {
+  role?: string;
+  email?: string;
+  authMethod?: string;
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -17,7 +23,7 @@ export async function proxy(request: NextRequest) {
 
     try {
       const { payload } = await jwtVerify(token, secret);
-      const sessionPayload = payload as any;
+      const sessionPayload = payload as unknown as AdminSessionPayload;
       if (sessionPayload.role !== "admin" && sessionPayload.email !== "admin@loops.vn") {
         // Not an admin, redirect back to home page
         return NextResponse.redirect(new URL("/", request.url));
@@ -39,7 +45,7 @@ export async function proxy(request: NextRequest) {
     if (token) {
       try {
         const { payload } = await jwtVerify(token, secret);
-        const sessionPayload = payload as any;
+        const sessionPayload = payload as unknown as AdminSessionPayload;
         if ((sessionPayload.role === "admin" || sessionPayload.email === "admin@loops.vn") && sessionPayload.authMethod === "password") {
           return NextResponse.redirect(new URL("/admin", request.url));
         }

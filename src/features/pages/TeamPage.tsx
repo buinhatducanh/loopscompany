@@ -113,7 +113,7 @@ interface TeamMember {
 const FRAME_DEPTH = 14;
 
 function TeamCard({ member, index }: { member: TeamMember; index: number }) {
-  const tilt = useTilt3D(6, 900);
+  const { ref: cardRef, onMouseMove, onMouseLeave } = useTilt3D(6, 900);
   const router = useRouter();
   const edgeDark = '#C8C3B5';
   const edgeDark2 = '#B0ABA0';
@@ -133,9 +133,9 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
       style={{ flex: '1 1 280px', minWidth: '260px', maxWidth: '360px' }}
     >
       <div
-        ref={tilt.ref}
-        onMouseMove={tilt.onMouseMove}
-        onMouseLeave={tilt.onMouseLeave}
+        ref={cardRef}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
         onClick={handleCardClick}
         style={{ cursor: 'pointer', willChange: 'transform', position: 'relative', height: '100%', display: 'flex', flexDirection: 'column' }}
       >

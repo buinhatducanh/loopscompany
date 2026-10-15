@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingZalo } from "@/components/layout/FloatingZalo";
+import { LoopsChatWidget } from "@/components/chat/LoopsChatWidget";
 import { SiteDataProvider } from "@/features/legacy-core/SiteDataContext";
 import { getSiteConfig } from "@/lib/site-config-server";
 import { BG, GLOBAL_CSS } from "@/features/legacy-core/tokens";
@@ -22,6 +23,7 @@ export default async function PublicLayout({
           {children}
           <Footer />
           <FloatingZalo />
+          <LoopsChatWidget />
         </div>
       </SiteDataProvider>
     </ThemeProvider>

@@ -14,11 +14,11 @@ export async function getSiteConfig(): Promise<SiteConfig> {
       orderBy: { num: "asc" }
     });
 
-    let dbConfig = row?.config ? (row.config as unknown as SiteConfig) : DEFAULT_SITE_CONFIG;
+    const initialConfig = row?.config ? (row.config as unknown as SiteConfig) : DEFAULT_SITE_CONFIG;
 
     // Auto-migration: If the Project table is empty but we have projects in the JSON config or defaults, seed them
     if (dbProjects.length === 0) {
-      const projectsToMigrate = dbConfig.portfolio?.projects || DEFAULT_SITE_CONFIG.portfolio.projects || [];
+      const projectsToMigrate = initialConfig.portfolio?.projects || DEFAULT_SITE_CONFIG.portfolio.projects || [];
       if (projectsToMigrate.length > 0) {
         await prisma.project.createMany({
           data: projectsToMigrate.map(p => ({
@@ -118,8 +118,8 @@ export async function getSiteConfig(): Promise<SiteConfig> {
         }
       };
     }
-  } catch (err) {
-    // console.error("Error in getSiteConfig:", err);
+  } catch (_err) {
+    // console.error("Error in getSiteConfig:", _err);
   }
   return DEFAULT_SITE_CONFIG;
 }
@@ -129,7 +129,7 @@ export async function saveSiteConfigToDb(config: SiteConfig) {
   const projects = config.portfolio?.projects || [];
 
   // Strip projects list from config to avoid duplicate storage in SiteSetting
-  const { projects: _, ...cleanPortfolio } = config.portfolio;
+  const { projects: _projects, ...cleanPortfolio } = config.portfolio;
   const configWithoutProjects = {
     ...config,
     portfolio: cleanPortfolio
