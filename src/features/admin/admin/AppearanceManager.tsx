@@ -126,12 +126,12 @@ export function AppearanceManager({ t, isDark, theme, onThemeChange }: Props) {
           <h3 className={`font-semibold ${t.text}`}>Bộ phông chữ</h3>
         </div>
         <div className={`rounded-xl p-4 ${isDark ? "bg-white/[0.04]" : "bg-gray-50"}`}>
-          <p className={`text-xs uppercase tracking-widest mb-2 ${t.textFaint}`}>Be Vietnam Pro</p>
+          <p className={`text-xs uppercase tracking-widest mb-2 ${t.textFaint}`}>Inter &amp; Montserrat</p>
           <p className={`text-3xl font-bold leading-tight ${t.text}`}>Việt Web Agency</p>
           <p className={`mt-2 text-sm ${t.textMuted}`}>Thiết kế website đẹp, chuẩn SEO, giao trong 5 ngày từ 189K/tháng.</p>
           <p className={`mt-1 text-xs ${t.textFaint}`}>ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</p>
         </div>
-        <p className={`mt-3 text-xs ${t.textFaint}`}>Be Vietnam Pro được dùng nhất quán trên toàn bộ website và admin.</p>
+        <p className={`mt-3 text-xs ${t.textFaint}`}>Phông chữ Inter &amp; Montserrat được dùng nhất quán trên toàn bộ website và admin.</p>
       </div>
 
       {/* Animation */}
