@@ -5,7 +5,7 @@ import {
   BarChart3, Eye, Layers3, LogOut, MonitorSmartphone, Palette,
   Search, Settings2, ShieldCheck, Sparkles, Globe, Menu, X,
   BookOpen, Users, UserSquare2, Laptop, Server, TrendingUp,
-  ShoppingBag, Cloud,
+  ShoppingBag, Cloud, Receipt, FileText,
 } from "lucide-react";
 import { tc, type AdminTheme, type AdminTab } from "./admin/types";
 import { Dashboard } from "./admin/Dashboard";
@@ -26,6 +26,7 @@ import { AppearanceManager } from "./admin/AppearanceManager";
 import { SiteConfigManager } from "./admin/SiteConfigManager";
 import { ContactManager } from "./admin/ContactManager";
 import { OrdersManager } from "./admin/OrdersManager";
+import { InvoiceManager } from "./admin/InvoiceManager";
 
 const NAV_ITEMS: { id: AdminTab; label: string; icon: typeof Layers3; group?: string }[] = [
   { id: "dashboard",   label: "Tổng quan",    icon: BarChart3,         group: "main" },
@@ -41,6 +42,7 @@ const NAV_ITEMS: { id: AdminTab; label: string; icon: typeof Layers3; group?: st
   { id: "blog",        label: "Bài viết",     icon: BookOpen,          group: "content" },
   { id: "contacts",    label: "Liên hệ",      icon: UserSquare2,       group: "content" },
   { id: "orders",      label: "Đơn hàng",     icon: ShoppingBag,       group: "content" },
+  { id: "invoices",    label: "Hóa đơn & VietQR", icon: Receipt,       group: "content" },
   { id: "users",       label: "Người dùng",   icon: Users,             group: "content" },
   { id: "team",        label: "Đội ngũ",      icon: UserSquare2,       group: "content" },
   { id: "siteConfig",  label: "Cấu hình Web", icon: Settings2,         group: "tools" },
@@ -237,6 +239,7 @@ export function Admin({
             {activeTab === "team"       && <TeamManager t={t} isDark={isDark} />}
             {activeTab === "contacts"   && <ContactManager t={t} isDark={isDark} />}
             {activeTab === "orders"     && <OrdersManager t={t} isDark={isDark} />}
+            {activeTab === "invoices"   && <InvoiceManager t={t} isDark={isDark} />}
             { activeTab === "seo"        && <SeoManager t={t} isDark={isDark} /> }
             { activeTab === "siteConfig" && <SiteConfigManager t={t} isDark={isDark} /> }
             { activeTab === "appearance" && <AppearanceManager t={t} isDark={isDark} theme={theme} onThemeChange={setTheme} /> }

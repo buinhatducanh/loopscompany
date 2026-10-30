@@ -18,7 +18,8 @@ export type AdminTab =
   | "seo"
   | "appearance"
   | "contacts"
-  | "orders";
+  | "orders"
+  | "invoices";
 
 export interface TC {
   page: string;

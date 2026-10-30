@@ -32,6 +32,8 @@ import {
   BranchOption,
   findDecisionNode,
 } from "@/lib/chatbot/decisionTree";
+import { FastDesignIntake } from "./FastDesignIntake";
+import { OpenChatOptions } from "@/lib/chatbot/chat-events";
 
 /** Danh mục câu hỏi nhanh nổi bật dành cho khách hàng mới */
 const QUICK_ACTION_CARDS = [
@@ -217,6 +219,8 @@ export function LoopsChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [view, setView] = useState<"chat" | "history">("chat");
+  const [isFastIntakeOpen, setIsFastIntakeOpen] = useState(false);
+  const [intakeTemplate, setIntakeTemplate] = useState("");
 
   // Hiển thị tin nhắn mời chào tự động sau khi vào trang & Huy hiệu 1 tin nhắn mới
   const [showWelcomeBubble, setShowWelcomeBubble] = useState(false);
@@ -533,6 +537,44 @@ export function LoopsChatWidget() {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  // Lắng nghe sự kiện mở chat từ các trang khác (Demo, Báo giá, Trang chủ)
+  useEffect(() => {
+    const handleOpenChatEvent = (e: CustomEvent<OpenChatOptions>) => {
+      setIsOpen(true);
+      setShowWelcomeBubble(false);
+      setHasUnread(false);
+
+      if (e.detail?.prefillLead?.templateTitle) {
+        setIntakeTemplate(e.detail.prefillLead.templateTitle);
+        setIsFastIntakeOpen(true);
+      } else if (e.detail?.message) {
+        setInputValue(e.detail.message);
+        if (e.detail.autoSend) {
+          setTimeout(() => {
+            handleSendMessage(e.detail.message);
+          }, 350);
+        }
+      }
+    };
+
+    window.addEventListener("loops:open-chat" as any, handleOpenChatEvent);
+    return () => window.removeEventListener("loops:open-chat" as any, handleOpenChatEvent);
+  }, [handleSendMessage]);
+
+  const handleIntakeSuccess = (summary: {
+    requestCode: string;
+    serviceType: string;
+    budget: string;
+    templateTitle: string;
+    name: string;
+    phone: string;
+  }) => {
+    setIsFastIntakeOpen(false);
+    setView("chat");
+    const confirmationText = `✅ **XÁC NHẬN ĐĂNG KÝ THIẾT KẾ WEB THÀNH CÔNG**\n\n- **Mã hồ sơ:** \`${summary.requestCode}\`\n- **Khách hàng:** ${summary.name} (${summary.phone})\n- **Gói yêu cầu:** ${summary.serviceType}\n- **Mẫu chọn:** ${summary.templateTitle || "Tư vấn thiết kế riêng"}\n- **Ngân sách:** ${summary.budget}\n\nĐội ngũ chuyên viên tư vấn LOOPS đã tiếp nhận và đang liên hệ qua số Zalo **${summary.phone}** trong ít phút nữa!`;
+    handleSendMessage(confirmationText);
   };
 
   const isLimitReached =
@@ -1117,6 +1159,28 @@ export function LoopsChatWidget() {
                   <>
                     <button
                       type="button"
+                      onClick={() => setIsFastIntakeOpen(true)}
+                      title="Đăng ký tư vấn thiết kế web 60 giây"
+                      style={{
+                        padding: "5px 10px",
+                        borderRadius: 10,
+                        background: "#f59e0b",
+                        border: "none",
+                        color: "#0f172a",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 4,
+                        fontSize: 11,
+                        fontWeight: 800,
+                        boxShadow: "0 2px 8px rgba(245, 158, 11, 0.4)",
+                        transition: "all 0.2s",
+                      }}
+                    >
+                      <Sparkles size={13} /> Báo giá 60s
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => setView("history")}
                       title="Xem các phiên trò chuyện cũ"
                       style={{
@@ -1220,8 +1284,17 @@ export function LoopsChatWidget() {
               </div>
             </div>
 
-            {/* 2.2 NỘI DUNG: XEM LỊCH SỬ CHAT (HISTORY VIEW) */}
-            {view === "history" ? (
+            {/* 2.2 NỘI DUNG: FORM ĐĂNG KÝ THIẾT KẾ WEB 60S HOẶC CHAT */}
+            {isFastIntakeOpen ? (
+              <FastDesignIntake
+                initialTemplate={intakeTemplate}
+                onClose={() => {
+                  setIsFastIntakeOpen(false);
+                  setIntakeTemplate("");
+                }}
+                onSuccess={handleIntakeSuccess}
+              />
+            ) : view === "history" ? (
               <div
                 className="loops-blue-scrollbar"
                 style={{
