@@ -93,64 +93,79 @@ export function GoogleProAdSpotlightSection() {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: 7,
-                  backgroundColor: "rgba(212, 59, 31, 0.12)",
-                  border: "1px solid rgba(212, 59, 31, 0.3)",
+                  gap: 8,
+                  backgroundColor: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
                   borderRadius: 9999,
-                  padding: "5px 14px",
-                  marginBottom: 14,
+                  padding: "6px 16px",
+                  marginBottom: 16,
+                  backdropFilter: "blur(12px)",
                 }}
               >
-                <Sparkles size={13} color="#f87171" />
+                <Sparkles size={13} className="text-amber-400" />
                 <span
                   style={{
                     fontSize: 11,
                     fontWeight: 700,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: "#fca5a5",
+                    color: "rgba(255, 255, 255, 0.85)",
                   }}
                 >
-                  Dịch vụ độc quyền · Giới hạn 299K
+                  Giải Pháp Hạ Tầng &amp; Trí Tuệ Nhân Tạo Doanh Nghiệp
                 </span>
               </div>
 
               {/* Headline */}
               <h2
                 style={{
-                  fontSize: "clamp(24px, 3.2vw, 38px)",
+                  fontSize: "clamp(26px, 3.4vw, 42px)",
                   fontWeight: 800,
                   color: "#ffffff",
                   letterSpacing: "-0.03em",
-                  lineHeight: 1.25,
-                  margin: "0 0 12px",
+                  lineHeight: 1.22,
+                  margin: "0 0 14px",
                 }}
               >
-                Nâng Cấp <span style={{ color: RED }}>Google Pro 18 Tháng</span>
-                <span
+                Nâng Tầm Không Gian Số Cùng{" "}
+                <span style={{ color: RED }}>Google Pro 18 Tháng</span>
+              </h2>
+
+              {/* Thẻ đặc quyền & chi phí đầu tư thanh lịch (Thay thế tag giá chợ cũ) */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  backgroundColor: "rgba(255, 255, 255, 0.03)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: 16,
+                  padding: "8px 14px",
+                  marginBottom: 16,
+                  flexWrap: "wrap",
+                }}
+              >
+                <div
                   style={{
-                    display: "block",
-                    fontSize: "0.78em",
-                    marginTop: 6,
-                    color: "rgba(255, 255, 255, 0.9)",
+                    backgroundColor: "rgba(245, 158, 11, 0.15)",
+                    border: "1px solid rgba(245, 158, 11, 0.3)",
+                    borderRadius: 8,
+                    padding: "3px 8px",
+                    fontSize: 11,
                     fontWeight: 700,
+                    color: "#fcd34d",
                   }}
                 >
-                  Trọn Gói 5TB &amp; Gemini AI ·{" "}
-                  <span style={{ color: "#facc15" }}>299.000đ</span>
-                  <span
-                    style={{
-                      marginLeft: 8,
-                      fontSize: "0.75em",
-                      color: TEXT35,
-                      textDecoration: "line-through",
-                      fontWeight: 400,
-                    }}
-                  >
-                    1.850.000đ
+                  Đặc quyền thành viên LOOP
+                </div>
+                <div style={{ fontSize: 12.5, color: "rgba(255, 255, 255, 0.85)" }}>
+                  Chi phí tài trợ: <strong style={{ color: "#ffffff", fontWeight: 800 }}>299.000đ</strong>{" "}
+                  trọn gói 18 tháng
+                  <span style={{ color: TEXT35, marginLeft: 8, fontSize: 11.5 }}>
+                    (Tiết kiệm 85% chi phí lưu trữ)
                   </span>
-                </span>
-              </h2>
+                </div>
+              </div>
 
               {/* Description */}
               <p
@@ -158,13 +173,13 @@ export function GoogleProAdSpotlightSection() {
                   color: TEXT60,
                   fontSize: "clamp(13px, 1.05vw, 15px)",
                   lineHeight: 1.65,
-                  margin: "0 0 18px",
+                  margin: "0 0 20px",
                   maxWidth: 540,
                 }}
               >
                 Mở rộng ngay <strong style={{ color: TEXT }}>5.000 GB (5TB) Google Drive & Photos</strong> cùng
-                trợ lý trí tuệ nhân tạo <strong style={{ color: TEXT }}>Gemini 3.8 Flash &amp; Advanced AI</strong> trên
-                chính Gmail cá nhân của bạn — an toàn, bảo mật và tiện lợi.
+                trợ lý trí tuệ nhân tạo <strong style={{ color: TEXT }}>Gemini 3.8 Advanced AI</strong> trên
+                chính Gmail cá nhân của bạn — an toàn, bảo mật và đồng bộ tuyệt đối trên mọi thiết bị.
               </p>
 
               {/* VIDEO MOCKUP TRÊN MOBILE (chỉ hiện trên màn hình < 1024px) */}
@@ -175,7 +190,8 @@ export function GoogleProAdSpotlightSection() {
                     width: "100%",
                     maxWidth: 240,
                     height: 320,
-                    background: "radial-gradient(circle, rgba(212,59,31,0.18) 0%, rgba(66,133,244,0.1) 50%, transparent 70%)",
+                    background:
+                      "radial-gradient(circle, rgba(212,59,31,0.18) 0%, rgba(66,133,244,0.1) 50%, transparent 70%)",
                     filter: "blur(35px)",
                     zIndex: 0,
                     pointerEvents: "none",
@@ -336,13 +352,13 @@ export function GoogleProAdSpotlightSection() {
                   }}
                   className="w-full sm:w-auto hover:brightness-110 active:scale-95 text-center"
                 >
-                  <span>Xem Chi Tiết &amp; Nhận Link 299K</span>
+                  <span>Khám Phá Chi Tiết &amp; Đăng Ký Gói</span>
                   <ArrowRight size={15} />
                 </Link>
 
                 <div className="inline-flex items-center gap-2 text-xs text-slate-400">
                   <CheckCircle2 size={14} className="text-emerald-400 flex-shrink-0" />
-                  <span>Bảo hành 18T · Hơn 3.400+ khách hàng tin dùng</span>
+                  <span>Bảo hành 18 Tháng · Hơn 3.400+ khách hàng tin dùng</span>
                 </div>
               </div>
             </div>
@@ -355,7 +371,8 @@ export function GoogleProAdSpotlightSection() {
                   width: "100%",
                   maxWidth: 280,
                   height: 380,
-                  background: "radial-gradient(circle, rgba(212,59,31,0.15) 0%, rgba(66,133,244,0.08) 50%, transparent 70%)",
+                  background:
+                    "radial-gradient(circle, rgba(212,59,31,0.15) 0%, rgba(66,133,244,0.08) 50%, transparent 70%)",
                   filter: "blur(40px)",
                   zIndex: 0,
                   pointerEvents: "none",

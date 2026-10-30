@@ -37,11 +37,12 @@ export function HomePage() {
     <>
       {visibility.hero !== false && <HeroCarousel />}
       {visibility.marquee !== false && <Marquee />}
-      <GoogleProAdSpotlightSection />
       {visibility.creativeVision !== false && <CreativeVisionSection />}
       {visibility.service !== false && <ServiceEcosystemSection />}
-      {visibility.whyChooseUs !== false && <WhySection />}
+      {/* Giải pháp bổ trợ hạ tầng đám mây cho doanh nghiệp */}
+      <GoogleProAdSpotlightSection />
       {visibility.portfolio !== false && <ProjectMuseumSection />}
+      {visibility.whyChooseUs !== false && <WhySection />}
       {visibility.process !== false && <ProcessSection />}
       {visibility.pricing !== false && <WebsiteRentalPricingSection />}
       {visibility.blog !== false && <BlogPreviewSection />}
