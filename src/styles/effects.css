@@ -84,3 +84,29 @@
   mask-composite: exclude;
   pointer-events: none;
 }
+
+
+/* Target Section Highlight Flash on Nav/Slide jump */
+@keyframes sectionGlowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 59, 31, 0.6), inset 0 0 20px rgba(212, 59, 31, 0.15);
+    outline: 2px solid rgba(212, 59, 31, 0.8);
+    outline-offset: -2px;
+  }
+  50% {
+    box-shadow: 0 0 35px 10px rgba(212, 59, 31, 0.4), inset 0 0 35px rgba(212, 59, 31, 0.25);
+    outline: 2px solid rgba(212, 59, 31, 1);
+    outline-offset: -2px;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 59, 31, 0), inset 0 0 0 transparent;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+  }
+}
+
+.section-scroll-highlight {
+  position: relative;
+  animation: sectionGlowPulse 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  z-index: 10;
+}

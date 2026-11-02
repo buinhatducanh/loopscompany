@@ -37,7 +37,7 @@ const STATIC_SERVICES = [
   {
     num: '01', label: 'Tạo Website',
     sub: 'Landing page, web app, thương mại điện tử chuyên nghiệp.',
-    img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800',
     accent: '#C8A261',
     tags: ['Landing Page', 'Web App', 'E-commerce'],
     size: 'large',
@@ -47,7 +47,7 @@ const STATIC_SERVICES = [
   {
     num: '02', label: 'Marketing',
     sub: 'Chiến lược digital, Google Ads, Meta Ads, tăng trưởng thực.',
-    img: 'https://images.unsplash.com/photo-1683721003111-070bcc053d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1683721003111-070bcc053d8b?auto=format&fit=crop&q=80&w=800',
     accent: '#D4AF37',
     tags: ['Google Ads', 'Meta Ads', 'SEO'],
     size: 'small',
@@ -56,7 +56,7 @@ const STATIC_SERVICES = [
   {
     num: '03', label: 'Content',
     sub: 'Copywriting, bài viết blog, kịch bản thương hiệu chất lượng cao.',
-    img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800',
     accent: '#DAA520',
     tags: ['Copywriting', 'Blog', 'Script'],
     size: 'small',
@@ -65,7 +65,7 @@ const STATIC_SERVICES = [
   {
     num: '04', label: 'Media & Video',
     sub: 'Ảnh thương mại, video quảng cáo, reels viral chất lượng điện ảnh.',
-    img: 'https://images.unsplash.com/photo-1497015289639-54688650d173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1497015289639-54688650d173?auto=format&fit=crop&q=80&w=800',
     accent: '#B8860B',
     tags: ['Video Ads', 'Reels', 'Photography'],
     size: 'large',
@@ -74,7 +74,7 @@ const STATIC_SERVICES = [
   {
     num: '05', label: 'Thương hiệu',
     sub: 'Logo, bộ nhận diện thương hiệu đồng bộ, design system.',
-    img: 'https://images.unsplash.com/photo-1779261320306-8885b83599ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1779261320306-8885b83599ff?auto=format&fit=crop&q=80&w=800',
     accent: '#E8D4A8',
     tags: ['Logo', 'Brand Kit', 'Design System'],
     size: 'small',
@@ -83,7 +83,7 @@ const STATIC_SERVICES = [
   {
     num: '06', label: 'Analytics',
     sub: 'Đo lường hiệu quả, báo cáo ROI, tối ưu chiến dịch liên tục.',
-    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
     accent: '#C8A261',
     tags: ['Dashboard', 'ROI Report', 'A/B Test'],
     size: 'small',
@@ -92,7 +92,7 @@ const STATIC_SERVICES = [
   {
     num: '07', label: 'Vận hành & Bảo trì',
     sub: 'Bảo mật, tối ưu tốc độ, nâng cấp hệ thống trơn tru 24/7.',
-    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800',
     accent: '#D4AF37',
     tags: ['Hosting', 'Security', 'Speed'],
     size: 'small',

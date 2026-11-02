@@ -50,7 +50,7 @@ export function SiteConfigManager({ t, isDark }: Props) {
       ...form.hero.slides,
       {
         mediaType: 'image' as const,
-        bgUrl: 'https://images.unsplash.com/photo-1748591646636-ad5132fed078?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTc0ODU5MTcxMA&ixlib=rb-4.0.3&q=80&w=1080',
+        bgUrl: 'https://images.unsplash.com/photo-1748591646636-ad5132fed078?auto=format&fit=crop&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTc0ODU5MTcxMA&ixlib=rb-4.0.3&q=80&w=1080',
         badge: 'Nhãn slide mới',
         title1: 'Tiêu đề dòng 1',
         title2: 'Tiêu đề dòng 2',

@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Sparkles,
+  MousePointerClick
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { BrowserMockup } from "@/components/ui/BrowserMockup";
 import { VerticalAdVideo } from "@/components/ads/VerticalAdVideo";
@@ -19,10 +26,36 @@ export function HeroCarousel() {
   const { config } = useSiteData();
   const router = useRouter();
 
-  const handleScrollToServices = () => {
-    const el = document.getElementById("services");
+  const navigateToDestination = (target?: string, link?: string) => {
+    // If explicit external/subpage route (e.g. /bao-gia or /google-pro)
+    if (link && !link.startsWith("#") && !link.startsWith("/#")) {
+      router.push(link);
+      return;
+    }
+
+    const sectionId = (target || link?.replace(/^(\/)?#/, "") || "").trim();
+    if (!sectionId) return;
+
+    const el = document.getElementById(sectionId);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      const headerOffset = 85;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      // Visual feedback highlight pulse
+      el.classList.remove("section-scroll-highlight");
+      void el.offsetWidth; // Force reflow
+      el.classList.add("section-scroll-highlight");
+      setTimeout(() => {
+        el.classList.remove("section-scroll-highlight");
+      }, 2400);
+    } else if (link) {
+      router.push(link);
     }
   };
 
@@ -66,6 +99,23 @@ export function HeroCarousel() {
     { ui1: IMG.ui2, ui2: IMG.ui5 },
     { ui1: IMG.ui4, ui2: IMG.ui6 },
   ][current % 3];
+
+  // Dynamic targets & labels for seamless navigation
+  const primaryTarget =
+    slide.targetSection ||
+    (isGoogleSlide ? "google-pro-spotlight" : current === 1 ? "quy-trinh" : "pricing");
+  const primaryLink = slide.ctaLink || (isGoogleSlide ? "/google-pro" : undefined);
+  const primaryCta =
+    slide.cta ||
+    (isGoogleSlide ? "Khám phá Google Pro" : current === 1 ? "Xem quy trình 5 ngày" : "Xem báo giá ngay");
+
+  const secondaryTarget =
+    slide.secondaryTargetSection ||
+    (isGoogleSlide ? "services" : current === 1 ? "portfolio" : current === 2 ? "lien-he" : "services");
+  const secondaryLink = slide.secondaryLink;
+  const secondaryCta =
+    slide.secondaryCta ||
+    (isGoogleSlide ? "Xem hệ sinh thái" : current === 1 ? "Kho mẫu giao diện" : current === 2 ? "Tư vấn 1:1" : "Xem dịch vụ");
 
   return (
     <section
@@ -281,10 +331,10 @@ export function HeroCarousel() {
                     {slide.sub}
                   </p>
 
-                  {/* CTAs */}
-                  <div className="hero-ctas flex items-center justify-center md:justify-start gap-3 w-full max-w-sm mx-auto md:max-w-none md:mx-0">
+                  {/* CTAs với cơ chế di chuyển mượt mà */}
+                  <div className="hero-ctas flex flex-wrap items-center justify-center md:justify-start gap-3 w-full max-w-sm mx-auto md:max-w-none md:mx-0">
                     <button
-                      onClick={() => router.push("/bao-gia")}
+                      onClick={() => navigateToDestination(primaryTarget, primaryLink)}
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -301,14 +351,14 @@ export function HeroCarousel() {
                         transition: "all 0.2s",
                         boxShadow: "0 8px 24px rgba(212, 59, 31, 0.4)",
                       }}
-                      className="hover:scale-105 active:scale-95"
+                      className="hover:scale-105 active:scale-95 group"
                     >
-                      <span>{slide.cta || "Xem báo giá ngay"}</span>
-                      <ArrowRight size={14} />
+                      <span>{primaryCta}</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
 
                     <button
-                      onClick={handleScrollToServices}
+                      onClick={() => navigateToDestination(secondaryTarget, secondaryLink)}
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -326,7 +376,7 @@ export function HeroCarousel() {
                       }}
                       className="hover:bg-white/10 active:scale-95"
                     >
-                      <span>Xem dịch vụ</span>
+                      <span>{secondaryCta}</span>
                     </button>
                   </div>
 
@@ -357,11 +407,11 @@ export function HeroCarousel() {
               </AnimatePresence>
             </div>
 
-            {/* Cột Phải – Trực quan hóa tương ứng từng Slide */}
+            {/* Cột Phải – Trực quan hóa tương ứng từng Slide (Clickable Mockup) */}
             <div className="order-2 md:order-2 w-full flex items-center justify-center relative">
               <AnimatePresence mode="wait">
                 {isGoogleSlide ? (
-                  /* Slide Google Pro / AI: Hiển thị Video Dọc với Thiết Kế Kính Sang Trọng (KHÔNG có tag giá thô thiển) */
+                  /* Slide Google Pro / AI: Hiển thị Video Dọc với Thiết Kế Kính Sang Trọng */
                   <motion.div
                     key="google-slide-visual"
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -379,13 +429,16 @@ export function HeroCarousel() {
                       }}
                     />
 
-                    {/* Tag Thông Số Kỹ Thuật Thanh Lịch (Thay thế tag giá cũ) */}
-                    <div className="absolute top-2 right-4 sm:right-10 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/85 border border-white/15 backdrop-blur-xl shadow-xl">
+                    {/* Tag Thông Số Kỹ Thuật Thanh Lịch */}
+                    <button
+                      onClick={() => navigateToDestination("google-pro-spotlight", "/google-pro")}
+                      className="absolute top-2 right-4 sm:right-10 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/85 border border-white/15 backdrop-blur-xl shadow-xl hover:border-red-500/50 hover:scale-105 transition-all cursor-pointer"
+                    >
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                       <span className="text-[11px] font-bold text-white tracking-wider">
                         5.000 GB • Gemini 3.8 AI
                       </span>
-                    </div>
+                    </button>
 
                     <div className="relative z-10 w-full flex justify-center">
                       <VerticalAdVideo
@@ -398,38 +451,48 @@ export function HeroCarousel() {
                     </div>
                   </motion.div>
                 ) : (
-                  /* Slide Thiết Kế Website (Mặc định của LOOP): Hiển thị Mockup Giao Diện Website 3D Đa Tầng Sang Trọng */
+                  /* Slide Thiết Kế Website (Mặc định của LOOP): Hiển thị Mockup Giao Diện Website 3D Đa Tầng Sang Trọng - Click để xem kho mẫu */
                   <motion.div
                     key={`web-mockup-${current}`}
                     initial={{ opacity: 0, x: 30, scale: 0.96 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     exit={{ opacity: 0, x: -20, scale: 0.96 }}
                     transition={{ duration: 0.7, ease: EASE }}
-                    className="relative w-full h-[380px] sm:h-[440px] flex items-center justify-center"
+                    className="relative w-full h-[380px] sm:h-[440px] flex items-center justify-center cursor-pointer group"
+                    onClick={() => navigateToDestination("portfolio")}
+                    title="Click vào mockup để khám phá kho 500+ dự án mẫu thực tế"
                   >
                     {/* Hào quang thương hiệu phía sau mockup web */}
                     <div
-                      className="absolute inset-0 max-w-[460px] h-[400px] rounded-full blur-[80px] opacity-30 pointer-events-none mx-auto"
+                      className="absolute inset-0 max-w-[460px] h-[400px] rounded-full blur-[80px] opacity-30 pointer-events-none mx-auto transition-opacity duration-500 group-hover:opacity-60"
                       style={{
                         background: "radial-gradient(circle, rgba(212,59,31,0.3) 0%, transparent 70%)",
                       }}
                     />
 
                     {/* Thẻ định vị chất lượng (Floating Liquid Glass Badge) */}
-                    <div className="absolute -top-3 right-6 z-30 flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/85 border border-white/15 backdrop-blur-xl shadow-2xl">
+                    <div className="absolute -top-3 right-6 z-30 flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/85 border border-white/15 backdrop-blur-xl shadow-2xl transition-transform duration-300 group-hover:scale-105">
                       <Sparkles size={13} className="text-amber-400" />
                       <span className="text-[11px] font-bold text-white tracking-wider uppercase">
                         Giao diện chuẩn UI/UX Quốc Tế
                       </span>
                     </div>
 
+                    {/* Interactive Hover Pill: Click để xem chi tiết mẫu */}
+                    <div className="absolute bottom-3 left-4 sm:left-6 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/85 border border-red-500/40 backdrop-blur-xl shadow-2xl transition-all duration-300 group-hover:bg-red-950/90 group-hover:border-red-500 group-hover:scale-105">
+                      <MousePointerClick size={12} className="text-red-400 animate-pulse" />
+                      <span className="text-[11px] font-semibold text-white/95">
+                        Click xem 500+ dự án live
+                      </span>
+                    </div>
+
                     {/* Desktop Browser Mockup (Lớp chính) */}
-                    <div className="absolute top-4 left-0 right-10 sm:right-14 z-10 rounded-2xl shadow-2xl overflow-hidden border border-white/15 transition-transform duration-700 hover:scale-[1.02]">
+                    <div className="absolute top-4 left-0 right-10 sm:right-14 z-10 rounded-2xl shadow-2xl overflow-hidden border border-white/15 transition-all duration-500 group-hover:scale-[1.02] group-hover:border-white/30">
                       <BrowserMockup src={mockups.ui1} />
                     </div>
 
                     {/* Sub Mockup / Tablet Perspective (Lớp đè tạo chiều sâu 3D) */}
-                    <div className="absolute bottom-2 right-0 sm:right-4 w-[58%] sm:w-[55%] z-20 rounded-2xl shadow-2xl overflow-hidden border border-white/20 transition-transform duration-700 hover:scale-[1.03]">
+                    <div className="absolute bottom-2 right-0 sm:right-4 w-[58%] sm:w-[55%] z-20 rounded-2xl shadow-2xl overflow-hidden border border-white/20 transition-all duration-500 group-hover:scale-[1.04] group-hover:border-white/40">
                       <BrowserMockup src={mockups.ui2} />
                     </div>
                   </motion.div>
@@ -440,8 +503,19 @@ export function HeroCarousel() {
         </div>
       )}
 
-      {/* Slide Navigation Dots & Progress Bar */}
+      {/* Slide Navigation Dots, Explore Cue & Progress Bar */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 4 }}>
+        {/* Quick Scroll Down Guide for Customers */}
+        <div className="hidden sm:flex justify-center pb-2">
+          <button
+            onClick={() => navigateToDestination("services")}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/50 hover:bg-black/80 text-white/70 hover:text-white border border-white/15 backdrop-blur-md text-[12px] font-medium tracking-wide transition-all duration-200 cursor-pointer shadow-lg hover:border-red-500/40 hover:scale-105"
+          >
+            <span>Cuộn xem quy trình & bảng giá chi tiết</span>
+            <ChevronDown size={13} className="animate-bounce text-red-400" />
+          </button>
+        </div>
+
         <div style={{ height: 2, backgroundColor: "var(--vw-ghost-md)" }}>
           <motion.div
             key={`prog-${current}`}

@@ -1,39 +1,43 @@
 /**
- * Biến đổi URL ảnh sang Cloudinary CDN thuần túy ở client (không import Node.js Cloudinary SDK)
+ * Biến đổi URL ảnh sang Cloudinary CDN an toàn
+ * Nếu là ảnh Cloudinary upload sẵn -> áp dụng transformation trực tiếp
+ * Nếu là ảnh ngoài -> trả về trực tiếp để tránh lỗi 401 (do Cloudinary chặn Fetch URL ở tài khoản miễn phí)
  */
-function formatCloudinaryFetchUrl(
+function formatCloudinaryUrl(
   src: string,
   options: { width?: number; height?: number; quality?: number; format?: string } = {}
 ): string {
   if (!src) return src;
-  if (src.includes("res.cloudinary.com")) return src;
+  if (src.startsWith("/") || src.startsWith("data:")) return src;
 
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  if (!cloudName || src.startsWith("/")) return src;
+  // Nếu là ảnh upload trên Cloudinary, áp dụng transformation an toàn
+  if (src.includes("res.cloudinary.com") && src.includes("/image/upload/")) {
+    const transforms = [
+      options.format ? `f_${options.format}` : "f_auto",
+      options.quality ? `q_${options.quality}` : "q_auto",
+      options.width ? `w_${options.width}` : "",
+      options.height ? `h_${options.height}` : "",
+      "c_fill",
+    ]
+      .filter(Boolean)
+      .join(",");
 
-  const transforms = [
-    options.format ? `f_${options.format}` : "f_auto",
-    options.quality ? `q_${options.quality}` : "q_auto",
-    options.width ? `w_${options.width}` : "",
-    options.height ? `h_${options.height}` : "",
-    "c_fill",
-  ]
-    .filter(Boolean)
-    .join(",");
+    return src.replace("/image/upload/", `/image/upload/${transforms}/`);
+  }
 
-  const encoded = encodeURIComponent(src);
-  return `https://res.cloudinary.com/${cloudName}/image/fetch/${transforms}/${encoded}`;
+  // Với ảnh bên ngoài, trả về URL gốc, không proxy qua /image/fetch/ để tránh 401 Unauthorized
+  return src;
 }
 
 /**
  * Tạo URL ảnh tối ưu cho demo gallery
- * Tự động chuyển đổi format webp/avif, scale kích thước chuẩn để tránh tải ảnh gốc nặng hàng chục MB
+ * Tự động scale kích thước chuẩn cho thumbnail/preview
  */
 export function getOptimizedDemoImage(
   url: string,
   variant: "thumbnail" | "preview" | "mobile" = "thumbnail"
 ): string {
-  if (!url) return "/images/placeholder.webp";
+  if (!url) return "/logo_White.png";
 
   // Nếu là ảnh nội bộ hoặc ảnh static import
   if (url.startsWith("/") || url.startsWith("data:")) {
@@ -43,13 +47,13 @@ export function getOptimizedDemoImage(
   // Preset tối ưu hóa theo mục đích hiển thị
   switch (variant) {
     case "thumbnail":
-      return formatCloudinaryFetchUrl(url, { width: 720, quality: 80, format: "webp" });
+      return formatCloudinaryUrl(url, { width: 720, quality: 80, format: "webp" });
     case "mobile":
-      return formatCloudinaryFetchUrl(url, { width: 420, quality: 85, format: "webp" });
+      return formatCloudinaryUrl(url, { width: 420, quality: 85, format: "webp" });
     case "preview":
-      return formatCloudinaryFetchUrl(url, { width: 1440, quality: 85, format: "webp" });
+      return formatCloudinaryUrl(url, { width: 1440, quality: 85, format: "webp" });
     default:
-      return formatCloudinaryFetchUrl(url, { width: 800, quality: 80, format: "webp" });
+      return formatCloudinaryUrl(url, { width: 800, quality: 80, format: "webp" });
   }
 }
 

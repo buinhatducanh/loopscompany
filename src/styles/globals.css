@@ -221,7 +221,7 @@ body { transition: background-color 0.38s ease; }
 }
 
 /* ─── Smooth scroll ──────────────────────────────────────────────────────── */
-html {
+html[data-scroll-behavior="smooth"] {
   scroll-behavior: smooth;
 }
 

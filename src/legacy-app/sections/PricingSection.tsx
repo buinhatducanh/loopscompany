@@ -74,7 +74,7 @@ export function PricingSection() {
   const inView = useInView(ref, { once: true });
   return (
     <section id="bang-gia" style={{ position: "relative", padding: "100px 24px", overflow: "hidden" }}>
-      <SectionBg src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=75" overlayOpacity={0.88} />
+      <SectionBg src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=75" overlayOpacity={0.88} />
       <GridPattern opacity={0.05} />
       <Orb size={600} opacity={0.14} top="-15%" left="20%" delay={0} />
       <Orb size={400} opacity={0.10} bottom="-10%" right="10%" delay={3} />

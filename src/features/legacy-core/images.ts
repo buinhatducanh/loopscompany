@@ -1,5 +1,5 @@
 const U = "https://images.unsplash.com/";
-const q = "?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=";
+const q = "?auto=format&fit=crop&w=";
 
 export const IMG = {
   // Hero slides

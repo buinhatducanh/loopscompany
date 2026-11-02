@@ -14,23 +14,25 @@ export function cloudinaryUrl(
   options: { width?: number; height?: number; quality?: number; format?: string } = {},
 ) {
   if (!src) return src;
-  if (src.includes("res.cloudinary.com")) return src;
+  if (src.startsWith("/") || src.startsWith("data:")) return src;
 
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  if (!cloudName || src.startsWith("/")) return src;
+  // Nếu là ảnh upload trên Cloudinary, áp dụng transformation trực tiếp
+  if (src.includes("res.cloudinary.com") && src.includes("/image/upload/")) {
+    const transforms = [
+      options.format ? `f_${options.format}` : "f_auto",
+      options.quality ? `q_${options.quality}` : "q_auto",
+      options.width ? `w_${options.width}` : "",
+      options.height ? `h_${options.height}` : "",
+      "c_fill",
+    ]
+      .filter(Boolean)
+      .join(",");
 
-  const transforms = [
-    options.format ? `f_${options.format}` : "f_auto",
-    options.quality ? `q_${options.quality}` : "q_auto",
-    options.width ? `w_${options.width}` : "",
-    options.height ? `h_${options.height}` : "",
-    "c_fill",
-  ]
-    .filter(Boolean)
-    .join(",");
+    return src.replace("/image/upload/", `/image/upload/${transforms}/`);
+  }
 
-  const encoded = encodeURIComponent(src);
-  return `https://res.cloudinary.com/${cloudName}/image/fetch/${transforms}/${encoded}`;
+  // Tránh /image/fetch/ trên tài khoản Cloudinary chưa bật Fetch API để không bị lỗi 401
+  return src;
 }
 
 export async function uploadImage(

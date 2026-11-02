@@ -7,7 +7,7 @@ import { RED, TEXT, TEXT60, TEXT35, BORDER_M, EASE } from "@/features/legacy-cor
 
 // Unsplash bokeh city lights — dark atmospheric, matches brand
 const BG_URL =
-  "https://images.unsplash.com/photo-1605002633049-3d164fc50933?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920";
+  "https://images.unsplash.com/photo-1605002633049-3d164fc50933?auto=format&fit=crop&ixlib=rb-4.1.0&q=80&w=1920";
 
 type Tab = "login" | "register";
 const SPRING = { type: "spring", stiffness: 400, damping: 34 } as const;

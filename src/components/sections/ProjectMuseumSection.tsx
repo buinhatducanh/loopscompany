@@ -17,14 +17,14 @@ interface ProjectItem {
 }
 
 const DEFAULT_PROJECTS: ProjectItem[] = [
-  { num: '01', title: 'VinFast Toàn Cầu',     cat: 'WEB · STRATEGY',  year: '2024', result: '+340% traffic', img: 'https://images.unsplash.com/photo-1615829386703-e2bb66a7cb7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#C8A261' },
-  { num: '02', title: 'Vista Residence',       cat: 'BRAND · UX',      year: '2024', result: 'Top 1 Google',   img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#7B61FF' },
-  { num: '03', title: 'Pho Ha Noi Kitchen',    cat: 'SOCIAL · CONTENT', year: '2025', result: '2M+ impressions',img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#00D9A3' },
-  { num: '04', title: 'Nova Fashion Week',     cat: 'VIDEO · ADS',      year: '2025', result: '8M views',       img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#FF6B6B' },
-  { num: '05', title: 'TechViet Startup Hub',  cat: 'WEB APP · DESIGN', year: '2025', result: '500+ users/ngày',img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#FFB347' },
-  { num: '06', title: 'GreenLeaf Organic',     cat: 'BRAND · PACKAGE',  year: '2026', result: '120% ROI',       img: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#00FF88' },
-  { num: '07', title: 'SunHouse Real Estate',  cat: 'WEB · MARKETING',  year: '2026', result: '3× leads',       img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#00CFFF' },
-  { num: '08', title: 'FoodieApp Vietnam',     cat: 'APP · CONTENT',    year: '2026', result: '50K downloads',  img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600', accent: '#C8A261' },
+  { num: '01', title: 'VinFast Toàn Cầu',     cat: 'WEB · STRATEGY',  year: '2024', result: '+340% traffic', img: 'https://res.cloudinary.com/dlzyhadx1/image/upload/v1786110272/loops/w7wkpf4as4wermr9sevv.png', accent: '#C8A261' },
+  { num: '02', title: 'Vista Residence',       cat: 'BRAND · UX',      year: '2024', result: 'Top 1 Google',   img: 'https://res.cloudinary.com/dlzyhadx1/image/upload/v1786110321/loops/pbzyacbzfcuc0odn3pfw.png', accent: '#7B61FF' },
+  { num: '03', title: 'Pho Ha Noi Kitchen',    cat: 'SOCIAL · CONTENT', year: '2025', result: '2M+ impressions',img: 'https://res.cloudinary.com/dlzyhadx1/image/upload/v1786109835/loops/orkdmc5ndmppjfuky5mj.png', accent: '#00D9A3' },
+  { num: '04', title: 'Nova Fashion Week',     cat: 'VIDEO · ADS',      year: '2025', result: '8M views',       img: '/img/woman_office_google_pro.jpg', accent: '#FF6B6B' },
+  { num: '05', title: 'TechViet Startup Hub',  cat: 'WEB APP · DESIGN', year: '2025', result: '500+ users/ngày',img: 'https://res.cloudinary.com/dlzyhadx1/image/upload/v1786110272/loops/w7wkpf4as4wermr9sevv.png', accent: '#FFB347' },
+  { num: '06', title: 'GreenLeaf Organic',     cat: 'BRAND · PACKAGE',  year: '2026', result: '120% ROI',       img: 'https://res.cloudinary.com/dlzyhadx1/image/upload/v1786110321/loops/pbzyacbzfcuc0odn3pfw.png', accent: '#00FF88' },
+  { num: '07', title: 'SunHouse Real Estate',  cat: 'WEB · MARKETING',  year: '2026', result: '3× leads',       img: 'https://res.cloudinary.com/dlzyhadx1/image/upload/v1786109835/loops/orkdmc5ndmppjfuky5mj.png', accent: '#00CFFF' },
+  { num: '08', title: 'FoodieApp Vietnam',     cat: 'APP · CONTENT',    year: '2026', result: '50K downloads',  img: '/img/ads-google-pro-stopped.jpg', accent: '#C8A261' },
 ];
 
 import Link from 'next/link';
@@ -48,7 +48,7 @@ function MarqueeCard({ p }: { p: ProjectItem }) {
       >
         {/* Image */}
         <div style={{ height: '180px', overflow: 'hidden', position: 'relative' }}>
-          <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }}
+          <img src={p.img} alt={p.title} referrerPolicy="no-referrer" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/logo_White.png"; }} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }}
             onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           />

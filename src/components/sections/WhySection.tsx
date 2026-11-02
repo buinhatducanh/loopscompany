@@ -61,7 +61,7 @@ export function WhySection() {
           transition={{ duration: 0.78, ease: EASE }}
           style={{ position: "relative" }}>
           <div style={{ borderRadius: 22, overflow: "hidden", aspectRatio: "4/5", boxShadow: "0 32px 80px rgba(0,0,0,0.6)" }}>
-            <img src={whyConfig.imgUrl || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600"} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src={whyConfig.imgUrl || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600"} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(2,2,2,0.5) 0%,transparent 55%)" }} />
           </div>
           {/* Stat card 1 */}
